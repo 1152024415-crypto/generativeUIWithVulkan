@@ -24,6 +24,13 @@ import { copyAllResourcesIfNeeded } from '../utils/ResourceCopier';
 import { EmotionType, recognizeEmotion } from '../utils/EmotionApi';
 import { EmotionDebouncer, mapFaceEmotionToChinese } from '../utils/EmotionDebouncer';
 
+interface EmotionStateWithConfidence {
+  emotion: string;
+  confidence: number;
+  confidences: Record<string, number>;
+  timestamp: number;
+}
+
 interface PresetItem {
   name: string;
   dsl: object | object[];
@@ -42,7 +49,7 @@ interface RawDebugCase {
   dsl: Array<Record<string, Object>>;
 }
 
-type NativeXComponentMethod = (...args: Object[]) => string | boolean | void;
+type NativeXComponentMethod = (...args: Object[]) => Object | string | boolean | void;
 
 interface WeatherInfo {
   temperature: Object;
@@ -343,36 +350,34 @@ struct Index {
   }
 
   private pollEmotionState(): void {
-    interface EmotionStateWithConfidence {
-      emotion: string;
-      confidence: number;
-      confidences: Record<string, number>;
-      timestamp: number;
-    }
+    const getEmotionStateWithConfidence = this.xComponentContext['getEmotionStateWithConfidence'];
+    const getEmotionState = this.xComponentContext['getEmotionState'];
 
-    const getEmotionStateWithConfidence = this.xComponentContext['getEmotionStateWithConfidence']
-      as (() => EmotionStateWithConfidence | null) | undefined;
-    const getEmotionState = this.xComponentContext['getEmotionState']
-      as (() => string | null) | undefined;
-
-    if (getEmotionStateWithConfidence) {
-      const state = getEmotionStateWithConfidence();
-      if (state && typeof state === 'object') {
+    if (typeof getEmotionStateWithConfidence === 'function') {
+      const stateRaw = getEmotionStateWithConfidence();
+      if (typeof stateRaw === 'object' && stateRaw !== null) {
+        const state = stateRaw as EmotionStateWithConfidence;
         const displayEmotion = typeof state.emotion === 'string' ? state.emotion : 'neutral';
+        const confidence = typeof state.confidence === 'number' ? state.confidence : 0;
+        const confidences: Record<string, number> = state.confidences && typeof state.confidences === 'object'
+          ? state.confidences as Record<string, number>
+          : {};
+        const timestamp = typeof state.timestamp === 'number' ? state.timestamp : Date.now();
+
         this.emotionState = displayEmotion;
-        hilog.info(0x0000, 'Index', `[Emotion] raw=${displayEmotion} conf=${state.confidence}`);
+        hilog.info(0x0000, 'Index', `[Emotion] raw=${displayEmotion} conf=${confidence}`);
 
         this.emotionDebouncer.push({
           emotion: displayEmotion,
-          confidence: typeof state.confidence === 'number' ? state.confidence : 0,
-          confidences: state.confidences || {},
-          timestamp: typeof state.timestamp === 'number' ? state.timestamp : Date.now()
+          confidence: confidence,
+          confidences: confidences,
+          timestamp: timestamp
         });
         return;
       }
     }
 
-    if (getEmotionState) {
+    if (typeof getEmotionState === 'function') {
       const state = getEmotionState();
       if (typeof state === 'string' && state.length > 0) {
         this.emotionState = state;

@@ -21,7 +21,6 @@ import { ActivityRecognizer, ActivityInfo } from './ActivityRecognizer';
 import { preferences } from '@kit.ArkData';
 import { common } from '@kit.AbilityKit';
 import http from '@ohos.net.http';
-import { queryBundleStatsInfos } from '@ohos.resourceschedule.usageStatistics';
 import notificationManager from '@ohos.notificationManager';
 import { SceneDetector, SceneInfo } from './SceneDetector';
 
@@ -94,6 +93,27 @@ export interface AppUsageItem {
   minutes: number;
   lastAccess: number;
 }
+
+interface BundleUsageRecord {
+  abilityInFgTotalTime?: number;
+  abilityPrevAccessTime?: number;
+}
+
+type QueryBundleStatsInfos = (startTime: number, endTime: number) => Promise<Record<string, BundleUsageRecord>>;
+
+interface UsageStatsQueryApi {
+  queryBundleStatsInfos: QueryBundleStatsInfos;
+}
+
+interface UsageStatsDefaultQueryApi {
+  default: QueryBundleStatsInfos;
+}
+
+interface UsageStatsDefaultContainer {
+  default: UsageStatsQueryApi;
+}
+
+type UsageStatisticsExport = QueryBundleStatsInfos | UsageStatsQueryApi | UsageStatsDefaultQueryApi | UsageStatsDefaultContainer;
 
 // 8. 日程项
 export interface ScheduleItem {
@@ -452,8 +472,14 @@ export class RealTimeDataService {
     try {
       const now = Date.now();
       const weekAgo = now - 7 * 24 * 60 * 60 * 1000;
-      
-      const bundleStats = await queryBundleStatsInfos(weekAgo, now);
+
+      const queryBundleStats = await RealTimeDataService.getQueryBundleStatsApi();
+      if (!queryBundleStats) {
+        console.warn('[RealTimeData] usageStatistics.queryBundleStatsInfos not available');
+        return [];
+      }
+
+      const bundleStats = await queryBundleStats(weekAgo, now);
       
       const ignoredBundles = new Set([
         'com.huawei.android.launcher',
@@ -476,17 +502,15 @@ export class RealTimeDataService {
         'com.xunmeng.pinduoduo': '拼多多',
       };
       
-      const entries = Object.entries(bundleStats as Record<string, Object>);
+      const bundles = Object.keys(bundleStats);
       const appList: AppUsageItem[] = [];
       
-      for (let i = 0; i < entries.length; i++) {
-        const entry = entries[i];
-        const bundle = entry[0];
-        const info = entry[1];
+      for (let i = 0; i < bundles.length; i++) {
+        const bundle = bundles[i];
+        const stats = bundleStats[bundle];
         
         if (ignoredBundles.has(bundle)) continue;
         
-        const stats = info as Record<string, number>;
         const totalTime = stats.abilityInFgTotalTime || 0;
         const lastAccess = stats.abilityPrevAccessTime || 0;
         const minutes = Math.round(totalTime / 60000);
@@ -508,6 +532,30 @@ export class RealTimeDataService {
       console.error('[RealTimeData] Get top apps failed: ' + JSON.stringify(e));
       return [];
     }
+  }
+
+  private static async getQueryBundleStatsApi(): Promise<QueryBundleStatsInfos | null> {
+    const usageStatisticsModule = await import('@ohos.resourceschedule.usageStatistics') as UsageStatisticsExport;
+    if (typeof usageStatisticsModule === 'function') {
+      return usageStatisticsModule as QueryBundleStatsInfos;
+    }
+
+    const withQueryApi = usageStatisticsModule as UsageStatsQueryApi;
+    if (typeof withQueryApi.queryBundleStatsInfos === 'function') {
+      return withQueryApi.queryBundleStatsInfos;
+    }
+
+    const defaultFn = usageStatisticsModule as UsageStatsDefaultQueryApi;
+    if (typeof defaultFn.default === 'function') {
+      return defaultFn.default;
+    }
+
+    const defaultContainer = usageStatisticsModule as UsageStatsDefaultContainer;
+    if (typeof defaultContainer.default === 'object' && typeof defaultContainer.default.queryBundleStatsInfos === 'function') {
+      return defaultContainer.default.queryBundleStatsInfos;
+    }
+
+    return null;
   }
 
   private static subscribeSensors(): void {
