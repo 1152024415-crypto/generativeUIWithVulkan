@@ -762,6 +762,40 @@ napi_value PluginRender::NapiGetEmotionState(napi_env env, napi_callback_info in
     return result;
 }
 
+napi_value PluginRender::NapiGetEmotionStateWithConfidence(napi_env env, napi_callback_info info)
+{
+    (void)info;
+    auto& manager = AgenUIEngine::EmotionManager::GetInstance();
+    auto state = manager.GetCurrentEmotionState();
+
+    napi_value result;
+    napi_create_object(env, &result);
+
+    napi_value emotionStr;
+    napi_create_string_utf8(env, state.emotion.c_str(), NAPI_AUTO_LENGTH, &emotionStr);
+    napi_set_named_property(env, result, "emotion", emotionStr);
+
+    napi_value confVal;
+    napi_create_int32(env, state.confidence, &confVal);
+    napi_set_named_property(env, result, "confidence", confVal);
+
+    napi_value confidencesObj;
+    napi_create_object(env, &confidencesObj);
+    constexpr const char* EMO_NAMES[6] = {"ecstatic", "happy", "neutral", "sad", "angry", "crying"};
+    for (int i = 0; i < 6; ++i) {
+        napi_value v;
+        napi_create_int32(env, state.confidences[i], &v);
+        napi_set_named_property(env, confidencesObj, EMO_NAMES[i], v);
+    }
+    napi_set_named_property(env, result, "confidences", confidencesObj);
+
+    napi_value tsVal;
+    napi_create_int64(env, state.timestampMs, &tsVal);
+    napi_set_named_property(env, result, "timestamp", tsVal);
+
+    return result;
+}
+
 napi_value PluginRender::NapiGetEmotionSnapshot(napi_env env, napi_callback_info info)
 {
     (void)info;
@@ -820,6 +854,8 @@ napi_value PluginRender::Export(napi_env env, napi_value exports)
         { "stopEmotionDetection", nullptr, PluginRender::NapiStopEmotionDetection, nullptr, nullptr, nullptr,
             napi_default, this},
         { "getEmotionState", nullptr, PluginRender::NapiGetEmotionState, nullptr, nullptr, nullptr,
+            napi_default, this},
+        { "getEmotionStateWithConfidence", nullptr, PluginRender::NapiGetEmotionStateWithConfidence, nullptr, nullptr, nullptr,
             napi_default, this},
         { "getEmotionSnapshot", nullptr, PluginRender::NapiGetEmotionSnapshot, nullptr, nullptr, nullptr,
             napi_default, this},

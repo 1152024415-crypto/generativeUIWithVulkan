@@ -22,6 +22,7 @@ import { LLMClient, LLMConfig, PROMPT_REGISTRY } from '../utils/LLMClient';
 import { DslFormat, getPrompt, getDebugCasesDirName, LANDSCAPE_BG_FILES, ICON_CATEGORIES } from '../prompts/DslPrompts';
 import { copyAllResourcesIfNeeded } from '../utils/ResourceCopier';
 import { EmotionType, recognizeEmotion } from '../utils/EmotionApi';
+import { EmotionDebouncer, mapFaceEmotionToChinese } from '../utils/EmotionDebouncer';
 
 interface PresetItem {
   name: string;
@@ -103,6 +104,7 @@ struct Index {
   private pendingCustomMarkdown: boolean = false;
   private pendingShowLLMLog: boolean = false;
   private emotionPollTimer: number = -1;
+  private emotionDebouncer: EmotionDebouncer = new EmotionDebouncer();
 
   // Preset prompts — set by applyOrientation() based on route params
   @State presetPrompts: SelectOption[] = [
@@ -341,16 +343,33 @@ struct Index {
   }
 
   private pollEmotionState(): void {
+    const getEmotionStateWithConfidence = this.xComponentContext['getEmotionStateWithConfidence'];
     const getEmotionState = this.xComponentContext['getEmotionState'];
-    if (!getEmotionState) {
-      return;
+
+    if (getEmotionStateWithConfidence) {
+      const state = getEmotionStateWithConfidence();
+      if (state && typeof state === 'object') {
+        const displayEmotion = typeof state.emotion === 'string' ? state.emotion : 'neutral';
+        this.emotionState = displayEmotion;
+        hilog.info(0x0000, 'Index', `[Emotion] raw=${displayEmotion} conf=${state.confidence}`);
+
+        this.emotionDebouncer.push({
+          emotion: displayEmotion,
+          confidence: typeof state.confidence === 'number' ? state.confidence : 0,
+          confidences: state.confidences || {},
+          timestamp: typeof state.timestamp === 'number' ? state.timestamp : Date.now()
+        });
+        return;
+      }
     }
-    const state = getEmotionState();
-    if (typeof state !== 'string' || state.length === 0) {
-      return;
+
+    if (getEmotionState) {
+      const state = getEmotionState();
+      if (typeof state === 'string' && state.length > 0) {
+        this.emotionState = state;
+        this.emotionDebouncer.push({ emotion: state, confidence: 60, confidences: {}, timestamp: Date.now() });
+      }
     }
-    this.emotionState = state;
-    hilog.info(0x0000, 'Index', `[Emotion] state=${state}`);
   }
 
   private stopEmotionRecognition(): void {
@@ -364,6 +383,8 @@ struct Index {
       hilog.info(0x0000, 'Index', `[Emotion] stop=${stopped}`);
     }
     this.emotionRunning = false;
+    this.emotionInitialized = false;
+    this.emotionDebouncer.reset();
   }
 
   aboutToDisappear(): void {
@@ -1090,6 +1111,20 @@ struct Index {
   }
 
   private async detectHealingEmotion(userPrompt: string): Promise<EmotionType> {
+    if (!this.emotionInitialized || !this.emotionRunning) {
+      hilog.info(0x0000, 'Index', `[HealingEmotion] Camera unavailable (init=${this.emotionInitialized} running=${this.emotionRunning}), fallback to text`);
+      return await recognizeEmotion(userPrompt);
+    }
+
+    const debounced = this.emotionDebouncer.compute();
+
+    if (debounced && debounced.emotion !== 'neutral') {
+      const chineseEmotion = mapFaceEmotionToChinese(debounced.emotion);
+      hilog.info(0x0000, 'Index', `[HealingEmotion] Using face (debounced): ${debounced.emotion} -> ${chineseEmotion} (conf=${debounced.confidence}, samples=${debounced.sampleCount})`);
+      return chineseEmotion;
+    }
+
+    hilog.info(0x0000, 'Index', `[HealingEmotion] Face neutral/insufficient (debounced: ${debounced?.emotion ?? 'null'}), fallback to text: ${userPrompt}`);
     return await recognizeEmotion(userPrompt);
   }
 

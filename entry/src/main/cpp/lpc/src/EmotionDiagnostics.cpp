@@ -164,6 +164,11 @@ std::string EmotionDiagnostics::EmotionName(int emotionIndex)
     return EMOTION_NAMES[NormalizeEmotionIndex(emotionIndex)];
 }
 
+const std::array<int, EMOTION_DISPLAY_CLASS_COUNT>& EmotionDiagnostics::GetConfidences() const
+{
+    return confidences_;
+}
+
 int EmotionDiagnostics::ClampConfidence(int confidence)
 {
     return std::max(0, std::min(100, confidence));

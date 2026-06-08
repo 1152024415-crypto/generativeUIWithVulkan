@@ -58,6 +58,15 @@ public:
     std::string GetSnapshotJson();
     bool ResetDiagnostics();
 
+    // Get current emotion state with confidence and per-class confidences
+    struct EmotionState {
+        std::string emotion;
+        int confidence;
+        std::array<int, EMOTION_DISPLAY_CLASS_COUNT> confidences;
+        int64_t timestampMs;
+    };
+    EmotionState GetCurrentEmotionState();
+
     EmotionDiagnostics diagnostics_;
 
 private:

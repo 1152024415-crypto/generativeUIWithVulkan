@@ -244,6 +244,16 @@ std::string EmotionManager::GetCurrentEmotion() {
     return currentEmotion_;
 }
 
+EmotionManager::EmotionState EmotionManager::GetCurrentEmotionState() {
+    std::lock_guard<std::mutex> lock(emotionMutex_);
+    EmotionState state;
+    state.emotion = currentEmotion_;
+    state.confidence = currentConfidence_;
+    state.confidences = diagnostics_.GetConfidences();
+    state.timestampMs = NowMs();
+    return state;
+}
+
 void EmotionManager::UpdateEmotion(int index, int confidence) {
     std::lock_guard<std::mutex> lock(emotionMutex_);
     currentEmotion_ = (index >= 0 && index < 6) ? EMO_ENGLISH[index] : "neutral";

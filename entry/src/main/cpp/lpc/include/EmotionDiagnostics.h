@@ -34,6 +34,8 @@ public:
 
     static std::string EmotionName(int emotionIndex);
 
+    const std::array<int, EMOTION_DISPLAY_CLASS_COUNT>& GetConfidences() const;
+
 private:
     struct RecentEventSnapshot {
         int64_t sequence = 0;
