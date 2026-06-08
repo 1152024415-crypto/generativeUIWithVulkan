@@ -106,6 +106,7 @@
           {
             "id": "emotion_label",
             "type": "text",
+            "dataPath": "/healing/emotionLabel",
             "content": "伤心",
             "variant": "body",
             "color": "#FFFFFF"
@@ -3191,6 +3192,7 @@
           {
             "id": "emotion_label",
             "type": "text",
+            "dataPath": "/healing/emotionLabel",
             "content": "伤心",
             "variant": "h3",
             "color": "#FFFFFF"

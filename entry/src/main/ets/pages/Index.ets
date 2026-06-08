@@ -23,7 +23,7 @@ import { DslFormat, getPrompt, getDebugCasesDirName, LANDSCAPE_BG_FILES, ICON_CA
 import { copyAllResourcesIfNeeded } from '../utils/ResourceCopier';
 import { EmotionType, recognizeEmotion } from '../utils/EmotionApi';
 import { EmotionDebouncer, mapFaceEmotionToChinese } from '../utils/EmotionDebouncer';
-import { EmotionConfidenceMap, parseEmotionSnapshot } from '../utils/EmotionDebugTypes';
+import { EmotionConfidenceMap, EmotionSnapshot, parseEmotionSnapshot } from '../utils/EmotionDebugTypes';
 
 interface PresetItem {
   name: string;
@@ -86,6 +86,7 @@ struct Index {
   @State emotionState: string = 'neutral';
   @State emotionInitialized: boolean = false;
   @State emotionRunning: boolean = false;
+  private currentEmotionLabel: string = '中性';
 
   xcomponentController: XComponentController = new XComponentController();
   private xComponentContext: Record<string, NativeXComponentMethod> = {};
@@ -353,8 +354,9 @@ struct Index {
     if (typeof getEmotionSnapshot === 'function') {
       const snapshotRaw = getEmotionSnapshot();
       if (typeof snapshotRaw === 'string' && snapshotRaw.length > 0) {
-        const snapshot = parseEmotionSnapshot(snapshotRaw);
+        const snapshot: EmotionSnapshot = parseEmotionSnapshot(snapshotRaw);
         this.emotionState = snapshot.emotion;
+        this.applyEmotionLabelPatch(snapshot);
         const confidences: EmotionConfidenceMap = {
           ecstatic: snapshot.confidences.ecstatic,
           happy: snapshot.confidences.happy,
@@ -388,6 +390,27 @@ struct Index {
     this.emotionRunning = false;
     this.emotionInitialized = false;
     this.emotionDebouncer.reset();
+    this.currentEmotionLabel = '中性';
+  }
+
+  private applyEmotionLabelPatch(snapshot: EmotionSnapshot): void {
+    const chineseEmotionLabel: EmotionType = mapFaceEmotionToChinese(snapshot.emotion);
+    if (chineseEmotionLabel === this.currentEmotionLabel) {
+      return;
+    }
+    this.currentEmotionLabel = chineseEmotionLabel;
+
+    if (!this.xComponentContext || !this.xComponentContext.parseUIDescriptor) {
+      return;
+    }
+
+    const patch: string = '{"updateDataModel":{"path":"/healing","value":{"emotionLabel":' +
+      JSON.stringify(chineseEmotionLabel) + '}}}';
+    try {
+      this.xComponentContext.parseUIDescriptor(patch);
+    } catch (err) {
+      hilog.error(0x0000, 'Index', `[EmotionLabel] failed to patch DSL: ${String((err as Error).message ?? err)}`);
+    }
   }
 
   aboutToDisappear(): void {
