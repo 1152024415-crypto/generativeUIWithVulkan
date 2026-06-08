@@ -50,6 +50,7 @@ class PluginRender {
     static napi_value NapiStartEmotionDetection(napi_env env, napi_callback_info info);
     static napi_value NapiStopEmotionDetection(napi_env env, napi_callback_info info);
     static napi_value NapiGetEmotionState(napi_env env, napi_callback_info info);
+    static napi_value NapiGetEmotionStateWithConfidence(napi_env env, napi_callback_info info);
     static napi_value NapiGetEmotionSnapshot(napi_env env, napi_callback_info info);
     static napi_value NapiResetEmotionDiagnostics(napi_env env, napi_callback_info info);
     // Vsync callback
