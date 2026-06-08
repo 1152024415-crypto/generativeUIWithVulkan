@@ -1,0 +1,11 @@
+{
+  "src": [
+    "pages/MainMenu",
+    "pages/Index",
+    "pages/GameConfig",
+    "pages/GamePage",
+    "pages/StreamTextConfig",
+    "pages/EmotionDebugPage",
+    "pages/ContextSensingPage"
+  ]
+}

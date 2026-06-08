@@ -1,0 +1,33 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "GenUiForMmx"
+    },
+    { "name": "location_reason", "value": "Node Mode needs location access to share your GPS position with the OpenClaw Gateway when requested." },
+    { "name": "camera_reason", "value": "Node Mode needs camera access to capture photos and video when requested by the OpenClaw Gateway." },
+    { "name": "microphone_reason", "value": "Node Mode needs microphone access to record audio during video capture and screen recording." },
+    { "name": "sms_reason", "value": "Node Mode needs SMS access to send text messages when requested by the OpenClaw Gateway." },
+    { "name": "file_reason", "value": "AI assistant needs file access to read and write documents when requested." },
+    { "name": "motion_reason", "value": "Context awareness needs motion sensors to detect walking, sitting, and activity changes for smart suggestions." },
+    { "name": "calendar_reason", "value": "AI assistant needs calendar access to create events and reminders when requested." },
+    { "name": "health_reason", "value": "Context awareness reads heart rate data from wearable devices to detect activity and health state for smart suggestions." },
+    { "name": "notification_reason", "value": "AI assistant needs notification access to alert you when new messages arrive while the app is in the background." },
+    { "name": "bluetooth_reason", "value": "Context awareness needs Bluetooth access to detect connected audio devices and peripherals for smart suggestions." },
+    { "name": "wifi_reason", "value": "Context awareness needs WiFi info to learn location signals and detect when you arrive at or leave familiar places like home or work." },
+    { "name": "telephony_reason", "value": "Context awareness reads cell tower information to detect location changes with low power consumption." },
+    { "name": "screen_data_reason", "value": "Context awareness learns your app usage patterns to provide smarter recommendations based on your daily routines and preferences." },
+    { "name": "camera_posture_reason", "value": "Context awareness uses front camera to detect if you're looking at the screen for smarter notification timing." },
+    { "name": "calllog_reason", "value": "Digital footprint reads call history to display incoming, outgoing, and missed call statistics." },
+    { "name": "reminder_reason", "value": "AI assistant needs reminder access to create and manage timed reminders when requested." },
+    { "name": "read_sms_reason", "value": "Digital footprint reads SMS messages to display message history and statistics." }
+  ]
+}

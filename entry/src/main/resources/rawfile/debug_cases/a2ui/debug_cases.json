@@ -1,0 +1,1032 @@
+[
+  {
+    "name": "✅A2UI 天气卡片-Row 布局",
+    "mode": "portrait",
+    "description": "A2UI 格式的天气卡片，图片在左文字在右",
+    "dsl": {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "main",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "styles": {
+              "background-color": "#E3F2FD",
+              "padding": "20px 20px 20px 20px",
+              "justify-content": "center",
+              "align-items": "center"
+            },
+            "children": ["weather_card"]
+          },
+          {
+            "id": "weather_card",
+            "component": "Card",
+            "styles": {
+              "background-color": "#90CAF9",
+              "border-radius": "30px",
+              "padding": "30px 30px 30px 30px"
+            },
+            "child": "card_content"
+          },
+          {
+            "id": "card_content",
+            "component": "Row",
+            "styles": {
+              "align-items": "center",
+              "justify-content": "center"
+            },
+            "children": ["weather_img", "text_group"]
+          },
+          {
+            "id": "text_group",
+            "component": "Column",
+            "styles": {
+              "padding": "0px 0px 0px 30px",
+              "justify-content": "center"
+            },
+            "children": ["city_text", "temp_text"]
+          },
+          {
+            "id": "city_text",
+            "component": "Text",
+            "text": "北京市 晴朗",
+            "variant": "h2",
+            "styles": {
+              "color": "#0D47A1"
+            }
+          },
+          {
+            "id": "temp_text",
+            "component": "Text",
+            "text": "26°C",
+            "variant": "h1",
+            "styles": {
+              "color": "#E65100"
+            }
+          },
+          {
+            "id": "weather_img",
+            "component": "Image",
+            "url": "weather/sun.png",
+            "styles": {
+              "width": "250px",
+              "height": "250px"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅A2UI 晚餐推荐-Card 嵌套",
+    "mode": "portrait",
+    "description": "A2UI 格式的晚餐推荐卡片",
+    "dsl": {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "main",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "styles": {
+              "background-color": "#F5F5F5",
+              "padding": "20px 20px 20px 20px"
+            },
+            "children": ["title", "dish1", "dish2"]
+          },
+          {
+            "id": "title",
+            "component": "Text",
+            "text": "减脂健康晚餐推荐",
+            "variant": "h2",
+            "styles": {
+              "color": "#1B5E20"
+            }
+          },
+          {
+            "id": "dish1",
+            "component": "Card",
+            "styles": {
+              "background-color": "#AED581",
+              "border-radius": "20px",
+              "padding": "20px 20px 20px 20px"
+            },
+            "child": "dish1_content"
+          },
+          {
+            "id": "dish1_content",
+            "component": "Text",
+            "text": "水煮时蔬\n新鲜时令蔬菜\n少油少盐，保留原味",
+            "variant": "body",
+            "styles": {
+              "color": "#212121"
+            }
+          },
+          {
+            "id": "dish2",
+            "component": "Card",
+            "styles": {
+              "background-color": "#C5E1A5",
+              "border-radius": "20px",
+              "padding": "20px 20px 20px 20px"
+            },
+            "child": "dish2_content"
+          },
+          {
+            "id": "dish2_content",
+            "component": "Text",
+            "text": "香煎鸡胸肉\n低脂高蛋白\n搭配黑胡椒和柠檬汁",
+            "variant": "body",
+            "styles": {
+              "color": "#212121"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅A2UI 静夜思-多行文本",
+    "mode": "portrait",
+    "description": "A2UI 格式的古诗排版",
+    "dsl": {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "main",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "styles": {
+              "background-color": "#FFF8E1",
+              "padding": "20px 20px 20px 20px",
+              "align-items": "center",
+              "justify-content": "center"
+            },
+            "children": ["poem_card"]
+          },
+          {
+            "id": "poem_card",
+            "component": "Card",
+            "styles": {
+              "background-color": "#FFE082",
+              "border-radius": "40px",
+              "padding": "40px 40px 40px 40px"
+            },
+            "child": "poem_content"
+          },
+          {
+            "id": "poem_content",
+            "component": "Column",
+            "styles": {
+              "align-items": "center"
+            },
+            "children": ["poem_title", "poem_body", "poem_author"]
+          },
+          {
+            "id": "poem_title",
+            "component": "Text",
+            "text": "静夜思",
+            "variant": "h2",
+            "styles": {
+              "color": "#4E342E"
+            }
+          },
+          {
+            "id": "poem_body",
+            "component": "Text",
+            "text": "床前明月光，\n疑是地上霜。\n举头望明月，\n低头思故乡。",
+            "variant": "h4",
+            "styles": {
+              "color": "#212121"
+            }
+          },
+          {
+            "id": "poem_author",
+            "component": "Text",
+            "text": "——李白",
+            "variant": "caption",
+            "styles": {
+              "color": "#757575"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅A2UI Row 水平布局",
+    "mode": "portrait",
+    "description": "A2UI 格式的 Row 水平排列测试",
+    "dsl": {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "main",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "styles": {
+              "background-color": "#E8F5E9",
+              "padding": "20px 20px 20px 20px",
+              "justify-content": "center"
+            },
+            "children": ["info_row"]
+          },
+          {
+            "id": "info_row",
+            "component": "Row",
+            "styles": {
+              "background-color": "#A5D6A7",
+              "border-radius": "20px",
+              "padding": "20px 20px 20px 20px",
+              "align-items": "center",
+              "justify-content": "space-between"
+            },
+            "children": ["label", "value"]
+          },
+          {
+            "id": "label",
+            "component": "Text",
+            "text": "温度",
+            "variant": "h4",
+            "styles": {
+              "color": "#1B5E20"
+            }
+          },
+          {
+            "id": "value",
+            "component": "Text",
+            "text": "26°C",
+            "variant": "h2",
+            "styles": {
+              "color": "#E65100"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅A2UI 数据绑定-天气",
+    "mode": "portrait",
+    "description": "A2UI 格式，使用 updateDataModel 绑定天气数据",
+    "dsl": {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "main",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "styles": {
+              "background-color": "#E3F2FD",
+              "padding": "20px",
+              "justify-content": "center",
+              "align-items": "center"
+            },
+            "children": ["card"]
+          },
+          {
+            "id": "card",
+            "component": "Card",
+            "styles": {
+              "background-color": "#90CAF9",
+              "border-radius": "30px",
+              "padding": "30px"
+            },
+            "child": "content"
+          },
+          {
+            "id": "content",
+            "component": "Column",
+            "styles": {
+              "align-items": "center"
+            },
+            "children": ["city", "temp", "desc"]
+          },
+          {
+            "id": "city",
+            "component": "Text",
+            "text": {"path": "/weather/city"},
+            "variant": "h2",
+            "styles": {
+              "color": "#0D47A1"
+            }
+          },
+          {
+            "id": "temp",
+            "component": "Text",
+            "text": {"path": "/weather/temp"},
+            "variant": "h1",
+            "styles": {
+              "color": "#E65100"
+            }
+          },
+          {
+            "id": "desc",
+            "component": "Text",
+            "text": {"path": "/weather/desc"},
+            "variant": "body",
+            "styles": {
+              "color": "#1565C0"
+            }
+          }
+        ]
+      },
+      "updateDataModel": {
+        "surfaceId": "main",
+        "value": {
+          "weather": {
+            "city": "北京市",
+            "temp": "26°C",
+            "desc": "晴朗，微风"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "✅A2UI 数据绑定-股票行情",
+    "mode": "portrait",
+    "description": "A2UI 格式，使用 updateDataModel 绑定多组股票数据",
+    "dsl": {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "main",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "styles": {
+              "background-color": "#FFF8E1",
+              "padding": "20px",
+              "justify-content": "center"
+            },
+            "children": ["title", "card1", "card2"]
+          },
+          {
+            "id": "title",
+            "component": "Text",
+            "text": {"path": "/title"},
+            "variant": "h2",
+            "styles": {
+              "color": "#4E342E"
+            }
+          },
+          {
+            "id": "card1",
+            "component": "Card",
+            "styles": {
+              "background-color": "#FFE082",
+              "border-radius": "20px",
+              "padding": "20px"
+            },
+            "child": "stock1"
+          },
+          {
+            "id": "stock1",
+            "component": "Text",
+            "text": {"path": "/stocks/0/display"},
+            "variant": "h4",
+            "styles": {
+              "color": "#212121"
+            }
+          },
+          {
+            "id": "card2",
+            "component": "Card",
+            "styles": {
+              "background-color": "#FFCC80",
+              "border-radius": "20px",
+              "padding": "20px"
+            },
+            "child": "stock2"
+          },
+          {
+            "id": "stock2",
+            "component": "Text",
+            "text": {"path": "/stocks/1/display"},
+            "variant": "h4",
+            "styles": {
+              "color": "#212121"
+            }
+          }
+        ]
+      },
+      "updateDataModel": {
+        "surfaceId": "main",
+        "value": {
+          "title": "股票行情",
+          "stocks": [
+            {"name": "上证指数", "price": "3250", "change": "+1.2%", "display": "上证指数 3250 +1.2%"},
+            {"name": "深证成指", "price": "11200", "change": "+0.8%", "display": "深证成指 11200 +0.8%"}
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "✅A2UI 天气详情卡-复杂布局",
+    "mode": "portrait",
+    "description": "复杂天气卡片：Header Row + 核心天气 Card + 三列指标 Row + 预报 Card，使用 margin/gap/space-around 等 CSS 属性",
+    "dsl": {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "main",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "children": ["header_section", "core_section", "metrics_section", "forecast_section"],
+            "styles": {
+              "padding": "24px",
+              "gap": "20px",
+              "justify-content": "center"
+            }
+          },
+          {
+            "id": "header_section",
+            "component": "Row",
+            "children": ["location_text", "date_text"],
+            "styles": {
+              "width": "100%",
+              "justify-content": "space-between",
+              "align-items": "center"
+            }
+          },
+          {
+            "id": "location_text",
+            "component": "Text",
+            "text": {"path": "/location"},
+            "variant": "h2",
+            "styles": { "font-size": "36px", "color": "#1A1A1A" }
+          },
+          {
+            "id": "date_text",
+            "component": "Text",
+            "text": {"path": "/date"},
+            "styles": { "font-size": "28px", "color": "#666666" }
+          },
+          {
+            "id": "core_section",
+            "component": "Card",
+            "child": "core_content",
+            "styles": {
+              "padding": "32px",
+              "border-radius": "24px",
+              "background-color": "#FFFFFF",
+              "margin": "0px"
+            }
+          },
+          {
+            "id": "core_content",
+            "component": "Column",
+            "children": ["weather_row", "weather_desc"],
+            "styles": { "align-items": "center", "gap": "16px" }
+          },
+          {
+            "id": "weather_row",
+            "component": "Row",
+            "children": ["temperature", "weather_icon_text"],
+            "styles": { "align-items": "center", "gap": "16px" }
+          },
+          {
+            "id": "temperature",
+            "component": "Text",
+            "text": {"path": "/temperature"},
+            "variant": "h1",
+            "styles": { "font-size": "40px", "color": "#FF9500" }
+          },
+          {
+            "id": "weather_icon_text",
+            "component": "Text",
+            "text": {"path": "/weatherIcon"},
+            "variant": "h3",
+            "styles": { "font-size": "48px", "color": "#FF9500" }
+          },
+          {
+            "id": "weather_desc",
+            "component": "Text",
+            "text": {"path": "/weatherDesc"},
+            "variant": "body",
+            "styles": { "font-size": "32px", "color": "#333333" }
+          },
+          {
+            "id": "metrics_section",
+            "component": "Row",
+            "children": ["humidity_col", "wind_col", "uv_col"],
+            "styles": {
+              "width": "100%",
+              "justify-content": "space-around"
+            }
+          },
+          {
+            "id": "humidity_col",
+            "component": "Column",
+            "children": ["humidity_value", "humidity_label"],
+            "styles": { "align-items": "center", "gap": "8px" }
+          },
+          {
+            "id": "humidity_value",
+            "component": "Text",
+            "text": {"path": "/humidity"},
+            "styles": { "font-size": "32px", "font-weight": "bold", "color": "#1A1A1A" }
+          },
+          {
+            "id": "humidity_label",
+            "component": "Text",
+            "text": "Humidity",
+            "styles": { "font-size": "24px", "color": "#999999" }
+          },
+          {
+            "id": "wind_col",
+            "component": "Column",
+            "children": ["wind_value", "wind_label"],
+            "styles": { "align-items": "center", "gap": "8px" }
+          },
+          {
+            "id": "wind_value",
+            "component": "Text",
+            "text": {"path": "/windSpeed"},
+            "styles": { "font-size": "32px", "font-weight": "bold", "color": "#1A1A1A" }
+          },
+          {
+            "id": "wind_label",
+            "component": "Text",
+            "text": "Wind",
+            "styles": { "font-size": "24px", "color": "#999999" }
+          },
+          {
+            "id": "uv_col",
+            "component": "Column",
+            "children": ["uv_value", "uv_label"],
+            "styles": { "align-items": "center", "gap": "8px" }
+          },
+          {
+            "id": "uv_value",
+            "component": "Text",
+            "text": {"path": "/uvIndex"},
+            "styles": { "font-size": "32px", "font-weight": "bold", "color": "#1A1A1A" }
+          },
+          {
+            "id": "uv_label",
+            "component": "Text",
+            "text": "UV Index",
+            "styles": { "font-size": "24px", "color": "#999999" }
+          },
+          {
+            "id": "forecast_section",
+            "component": "Card",
+            "child": "forecast_content",
+            "styles": {
+              "padding": "24px",
+              "border-radius": "20px",
+              "background-color": "#FFFFFF"
+            }
+          },
+          {
+            "id": "forecast_content",
+            "component": "Column",
+            "children": ["forecast_title", "forecast_row1", "forecast_row2", "forecast_row3"],
+            "styles": { "gap": "12px" }
+          },
+          {
+            "id": "forecast_title",
+            "component": "Text",
+            "text": "5-Day Forecast",
+            "variant": "h2",
+            "styles": { "font-size": "36px", "color": "#1A1A1A", "margin": "0px 0px 8px 0px" }
+          },
+          {
+            "id": "forecast_row1",
+            "component": "Row",
+            "children": ["fc1_day", "fc1_temp"],
+            "styles": {
+              "justify-content": "space-between",
+              "align-items": "center",
+              "padding": "16px",
+              "background-color": "#F5F5F5",
+              "border-radius": "16px"
+            }
+          },
+          {
+            "id": "fc1_day",
+            "component": "Text",
+            "text": {"path": "/forecast/0/day"},
+            "styles": { "font-size": "32px", "color": "#333333" }
+          },
+          {
+            "id": "fc1_temp",
+            "component": "Text",
+            "text": {"path": "/forecast/0/temp"},
+            "styles": { "font-size": "32px", "font-weight": "bold", "color": "#1A1A1A" }
+          },
+          {
+            "id": "forecast_row2",
+            "component": "Row",
+            "children": ["fc2_day", "fc2_temp"],
+            "styles": {
+              "justify-content": "space-between",
+              "align-items": "center",
+              "padding": "16px",
+              "background-color": "#F5F5F5",
+              "border-radius": "16px"
+            }
+          },
+          {
+            "id": "fc2_day",
+            "component": "Text",
+            "text": {"path": "/forecast/1/day"},
+            "styles": { "font-size": "32px", "color": "#333333" }
+          },
+          {
+            "id": "fc2_temp",
+            "component": "Text",
+            "text": {"path": "/forecast/1/temp"},
+            "styles": { "font-size": "32px", "font-weight": "bold", "color": "#1A1A1A" }
+          },
+          {
+            "id": "forecast_row3",
+            "component": "Row",
+            "children": ["fc3_day", "fc3_temp"],
+            "styles": {
+              "justify-content": "space-between",
+              "align-items": "center",
+              "padding": "16px",
+              "background-color": "#F5F5F5",
+              "border-radius": "16px"
+            }
+          },
+          {
+            "id": "fc3_day",
+            "component": "Text",
+            "text": {"path": "/forecast/2/day"},
+            "styles": { "font-size": "32px", "color": "#333333" }
+          },
+          {
+            "id": "fc3_temp",
+            "component": "Text",
+            "text": {"path": "/forecast/2/temp"},
+            "styles": { "font-size": "32px", "font-weight": "bold", "color": "#1A1A1A" }
+          }
+        ]
+      },
+      "updateDataModel": {
+        "surfaceId": "main",
+        "value": {
+          "location": "Beijing, China",
+          "date": "May 16, 2026",
+          "weatherIcon": "☀️",
+          "temperature": "28°C",
+          "weatherDesc": "Clear Sky, Sunny",
+          "humidity": "45%",
+          "windSpeed": "12 km/h",
+          "uvIndex": "High",
+          "forecast": [
+            { "day": "Today", "temp": "28°/18°" },
+            { "day": "Tomorrow", "temp": "25°/16°" },
+            { "day": "Saturday", "temp": "30°/20°" }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "✅A2UI 航班预订卡-复杂布局",
+    "mode": "portrait",
+    "description": "复杂航班卡片：深色 Header + 出发到达路线 + 航班详情三列 + 价格明细 + 操作按钮，使用大量 margin/gap/justify/align 属性",
+    "dsl": {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "main",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "children": ["main_card"],
+            "styles": { "padding": "20px", "justify-content": "center" }
+          },
+          {
+            "id": "main_card",
+            "component": "Card",
+            "child": "card_body",
+            "styles": {
+              "padding": "0px",
+              "border-radius": "20px",
+              "background-color": "#FFFFFF"
+            }
+          },
+          {
+            "id": "card_body",
+            "component": "Column",
+            "children": ["header_row", "route_row", "details_row", "price_row", "cta_row"],
+            "styles": { "gap": "0px" }
+          },
+          {
+            "id": "header_row",
+            "component": "Row",
+            "children": ["airline_info", "status_badge"],
+            "styles": {
+              "padding": "20px 24px",
+              "justify-content": "space-between",
+              "align-items": "center",
+              "background-color": "#1E3A5F",
+              "border-radius": "20px"
+            }
+          },
+          {
+            "id": "airline_info",
+            "component": "Column",
+            "children": ["airline_name", "flight_number"],
+            "styles": { "gap": "4px" }
+          },
+          {
+            "id": "airline_name",
+            "component": "Text",
+            "text": {"path": "/airline"},
+            "styles": { "font-size": "32px", "font-weight": "bold", "color": "#FFFFFF" }
+          },
+          {
+            "id": "flight_number",
+            "component": "Text",
+            "text": {"path": "/flightNo"},
+            "styles": { "font-size": "24px", "color": "#FFFFFFCC" }
+          },
+          {
+            "id": "status_badge",
+            "component": "Text",
+            "text": "CONFIRMED",
+            "styles": {
+              "font-size": "24px",
+              "font-weight": "bold",
+              "color": "#FFFFFF",
+              "padding": "6px 12px",
+              "background-color": "#4CAF50",
+              "border-radius": "8px"
+            }
+          },
+          {
+            "id": "route_row",
+            "component": "Row",
+            "children": ["dep_col", "flight_mid", "arr_col"],
+            "styles": {
+              "padding": "24px",
+              "justify-content": "space-between",
+              "align-items": "center",
+              "background-color": "#FAFAFA"
+            }
+          },
+          {
+            "id": "dep_col",
+            "component": "Column",
+            "children": ["dep_time", "dep_city", "dep_airport"],
+            "styles": { "align-items": "center", "gap": "8px" }
+          },
+          {
+            "id": "dep_time",
+            "component": "Text",
+            "text": {"path": "/departureTime"},
+            "styles": { "font-size": "40px", "color": "#1E3A5F" }
+          },
+          {
+            "id": "dep_city",
+            "component": "Text",
+            "text": {"path": "/departureCity"},
+            "styles": { "font-size": "32px", "color": "#333333" }
+          },
+          {
+            "id": "dep_airport",
+            "component": "Text",
+            "text": {"path": "/departureAirport"},
+            "styles": { "font-size": "24px", "color": "#666666" }
+          },
+          {
+            "id": "flight_mid",
+            "component": "Column",
+            "children": ["duration_text", "plane_text"],
+            "styles": { "align-items": "center", "gap": "8px" }
+          },
+          {
+            "id": "duration_text",
+            "component": "Text",
+            "text": {"path": "/duration"},
+            "styles": { "font-size": "24px", "color": "#999999" }
+          },
+          {
+            "id": "plane_text",
+            "component": "Text",
+            "text": "→",
+            "styles": { "font-size": "32px", "color": "#1E3A5F" }
+          },
+          {
+            "id": "arr_col",
+            "component": "Column",
+            "children": ["arr_time", "arr_city", "arr_airport"],
+            "styles": { "align-items": "center", "gap": "8px" }
+          },
+          {
+            "id": "arr_time",
+            "component": "Text",
+            "text": {"path": "/arrivalTime"},
+            "styles": { "font-size": "40px", "color": "#1E3A5F" }
+          },
+          {
+            "id": "arr_city",
+            "component": "Text",
+            "text": {"path": "/arrivalCity"},
+            "styles": { "font-size": "32px", "color": "#333333" }
+          },
+          {
+            "id": "arr_airport",
+            "component": "Text",
+            "text": {"path": "/arrivalAirport"},
+            "styles": { "font-size": "24px", "color": "#666666" }
+          },
+          {
+            "id": "details_row",
+            "component": "Row",
+            "children": ["date_col", "class_col", "seat_col"],
+            "styles": {
+              "padding": "16px 24px",
+              "justify-content": "space-between",
+              "background-color": "#FFFFFF"
+            }
+          },
+          {
+            "id": "date_col",
+            "component": "Column",
+            "children": ["date_label", "date_value"],
+            "styles": { "gap": "4px" }
+          },
+          {
+            "id": "date_label",
+            "component": "Text",
+            "text": "Date",
+            "styles": { "font-size": "24px", "color": "#999999" }
+          },
+          {
+            "id": "date_value",
+            "component": "Text",
+            "text": {"path": "/date"},
+            "styles": { "font-size": "32px", "color": "#333333" }
+          },
+          {
+            "id": "class_col",
+            "component": "Column",
+            "children": ["class_label", "class_value"],
+            "styles": { "gap": "4px" }
+          },
+          {
+            "id": "class_label",
+            "component": "Text",
+            "text": "Class",
+            "styles": { "font-size": "24px", "color": "#999999" }
+          },
+          {
+            "id": "class_value",
+            "component": "Text",
+            "text": {"path": "/cabinClass"},
+            "styles": { "font-size": "32px", "color": "#1E3A5F" }
+          },
+          {
+            "id": "seat_col",
+            "component": "Column",
+            "children": ["seat_label", "seat_value"],
+            "styles": { "gap": "4px" }
+          },
+          {
+            "id": "seat_label",
+            "component": "Text",
+            "text": "Seat",
+            "styles": { "font-size": "24px", "color": "#999999" }
+          },
+          {
+            "id": "seat_value",
+            "component": "Text",
+            "text": {"path": "/seat"},
+            "styles": { "font-size": "32px", "color": "#333333" }
+          },
+          {
+            "id": "price_row",
+            "component": "Row",
+            "children": ["price_info", "total_col"],
+            "styles": {
+              "padding": "20px 24px",
+              "justify-content": "space-between",
+              "align-items": "center",
+              "background-color": "#F8F9FA"
+            }
+          },
+          {
+            "id": "price_info",
+            "component": "Column",
+            "children": ["base_price", "tax_price"],
+            "styles": { "gap": "4px" }
+          },
+          {
+            "id": "base_price",
+            "component": "Text",
+            "text": {"path": "/basePrice"},
+            "styles": { "font-size": "24px", "color": "#666666" }
+          },
+          {
+            "id": "tax_price",
+            "component": "Text",
+            "text": {"path": "/taxPrice"},
+            "styles": { "font-size": "24px", "color": "#666666" }
+          },
+          {
+            "id": "total_col",
+            "component": "Column",
+            "children": ["total_label", "total_value"],
+            "styles": { "align-items": "flex-end", "gap": "4px" }
+          },
+          {
+            "id": "total_label",
+            "component": "Text",
+            "text": "Total",
+            "styles": { "font-size": "24px", "color": "#999999" }
+          },
+          {
+            "id": "total_value",
+            "component": "Text",
+            "text": {"path": "/totalPrice"},
+            "styles": { "font-size": "36px", "color": "#FF6B6B" }
+          },
+          {
+            "id": "cta_row",
+            "component": "Column",
+            "children": ["cta_buttons"],
+            "styles": {
+              "padding": "16px 24px 24px"
+            }
+          },
+          {
+            "id": "cta_buttons",
+            "component": "Row",
+            "children": ["modify_btn", "checkin_btn"],
+            "styles": {
+              "width": "100%",
+              "justify-content": "space-between"
+            }
+          },
+          {
+            "id": "modify_btn",
+            "component": "Button",
+            "child": "modify_btn_text",
+            "styles": {
+              "padding": "12px 24px",
+              "border-radius": "12px",
+              "background-color": "#F0F4F8"
+            }
+          },
+          {
+            "id": "modify_btn_text",
+            "component": "Text",
+            "text": "Modify",
+            "styles": { "font-size": "32px", "color": "#1E3A5F" }
+          },
+          {
+            "id": "checkin_btn",
+            "component": "Button",
+            "child": "checkin_btn_text",
+            "styles": {
+              "padding": "12px 24px",
+              "border-radius": "12px",
+              "background-color": "#1E3A5F"
+            }
+          },
+          {
+            "id": "checkin_btn_text",
+            "component": "Text",
+            "text": "Check-in",
+            "styles": { "font-size": "32px", "color": "#FFFFFF" }
+          }
+        ]
+      },
+      "updateDataModel": {
+        "surfaceId": "main",
+        "value": {
+          "airline": "China Southern Airlines",
+          "flightNo": "CZ3105",
+          "departureTime": "08:30",
+          "departureCity": "Beijing",
+          "departureAirport": "PEK - Capital",
+          "arrivalTime": "11:45",
+          "arrivalCity": "Shanghai",
+          "arrivalAirport": "SHA - Hongqiao",
+          "duration": "3h 15m",
+          "date": "May 20, 2026",
+          "cabinClass": "Business",
+          "seat": "12A",
+          "basePrice": "Base: ¥2,400 x 2",
+          "taxPrice": "Tax & Fees: ¥360",
+          "totalPrice": "¥5,160"
+        }
+      }
+    }
+  }
+]

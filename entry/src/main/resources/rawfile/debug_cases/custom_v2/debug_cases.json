@@ -1,0 +1,4330 @@
+[
+  {
+    "name": "✅横屏：情绪心灵鸡汤-情绪标签展示",
+    "mode": "landscape",
+    "description": "情绪心灵鸡汤：顶部日期天气玻璃bar + 情绪标签pill + 主句副句 + 右侧情绪bar + 换句按钮",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2848,
+              1320
+            ],
+            "src": "backgrounds-landscape/beach-sunrise.jpg",
+            "children": [
+              "date_bar",
+              "emotion_tag",
+              "quote_text",
+              "sub_text",
+              "mood_bar",
+              "refresh_btn"
+            ]
+          },
+          {
+            "id": "date_bar",
+            "type": "rect",
+            "pos": [
+              200,
+              80
+            ],
+            "size": [
+              620,
+              130
+            ],
+            "color": "#401A237E",
+            "radius": 65,
+            "glass": true,
+            "padding": [
+              0,
+              34,
+              0,
+              34
+            ],
+            "direction": "horizontal",
+            "gap": 18,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "date_icon",
+              "date_text"
+            ]
+          },
+          {
+            "id": "date_icon",
+            "type": "img",
+            "size": [
+              52,
+              52
+            ],
+            "src": "healing/sunrise.png"
+          },
+          {
+            "id": "date_text",
+            "type": "text",
+            "content": "6月8日 · 周日 10:00 晴",
+            "variant": "h5",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "emotion_tag",
+            "type": "rect",
+            "pos": [
+              200,
+              270
+            ],
+            "size": [
+              340,
+              100
+            ],
+            "color": "#D8E65100",
+            "radius": 50,
+            "direction": "horizontal",
+            "gap": 14,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "emotion_icon",
+              "emotion_label"
+            ]
+          },
+          {
+            "id": "emotion_icon",
+            "type": "img",
+            "size": [
+              48,
+              48
+            ],
+            "src": "healing/heart.png"
+          },
+          {
+            "id": "emotion_label",
+            "type": "text",
+            "content": "伤心",
+            "variant": "body",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "quote_text",
+            "type": "text",
+            "pos": [
+              200,
+              440
+            ],
+            "dataPath": "/healing/quote",
+            "variant": "h1",
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 5,
+            "glowIntensity": 0.18
+          },
+          {
+            "id": "sub_text",
+            "type": "text",
+            "pos": [
+              200,
+              780
+            ],
+            "dataPath": "/healing/sub",
+            "variant": "h4",
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 4,
+            "glowIntensity": 0.14
+          },
+          {
+            "id": "mood_bar",
+            "type": "rect",
+            "pos": [
+              2100,
+              300
+            ],
+            "size": [
+              500,
+              620
+            ],
+            "color": "#40FFFFFF",
+            "radius": 100,
+            "glass": true,
+            "padding": [
+              28,
+              28,
+              28,
+              28
+            ],
+            "direction": "vertical",
+            "gap": 30,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1",
+              "mood2",
+              "mood3"
+            ]
+          },
+          {
+            "id": "mood1",
+            "type": "rect",
+            "size": [
+              420,
+              150
+            ],
+            "color": "#B3FFE082",
+            "radius": 75,
+            "direction": "horizontal",
+            "gap": 14,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1_icon",
+              "mood1_text"
+            ]
+          },
+          {
+            "id": "mood1_icon",
+            "type": "img",
+            "size": [
+              48,
+              48
+            ],
+            "src": "healing/heart.png"
+          },
+          {
+            "id": "mood1_text",
+            "type": "text",
+            "content": "允许难过",
+            "variant": "body",
+            "color": "#1A237E"
+          },
+          {
+            "id": "mood2",
+            "type": "rect",
+            "size": [
+              420,
+              150
+            ],
+            "color": "#B3FFFFFF",
+            "radius": 75,
+            "direction": "horizontal",
+            "gap": 14,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood2_icon",
+              "mood2_text"
+            ]
+          },
+          {
+            "id": "mood2_icon",
+            "type": "img",
+            "size": [
+              48,
+              48
+            ],
+            "src": "healing/feather.png"
+          },
+          {
+            "id": "mood2_text",
+            "type": "text",
+            "content": "被温柔接住",
+            "variant": "body",
+            "color": "#1A237E"
+          },
+          {
+            "id": "mood3",
+            "type": "rect",
+            "size": [
+              420,
+              150
+            ],
+            "color": "#B3E1BEE7",
+            "radius": 75,
+            "direction": "horizontal",
+            "gap": 14,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood3_icon",
+              "mood3_text"
+            ]
+          },
+          {
+            "id": "mood3_icon",
+            "type": "img",
+            "size": [
+              48,
+              48
+            ],
+            "src": "healing/leaf.png"
+          },
+          {
+            "id": "mood3_text",
+            "type": "text",
+            "content": "慢慢恢复",
+            "variant": "body",
+            "color": "#1A237E"
+          },
+          {
+            "id": "refresh_btn",
+            "type": "circle",
+            "pos": [
+              1100,
+              960
+            ],
+            "radius": 110,
+            "color": "#D82F9E9B",
+            "direction": "vertical",
+            "gap": 4,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "refresh_icon",
+              "refresh_txt"
+            ],
+            "action": "换一句安慰的话"
+          },
+          {
+            "id": "refresh_icon",
+            "type": "img",
+            "size": [
+              60,
+              60
+            ],
+            "src": "healing/refresh.png"
+          },
+          {
+            "id": "refresh_txt",
+            "type": "text",
+            "content": "换句",
+            "variant": "body",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/healing",
+        "value": {
+          "quote": "世界很大，\n难过一会儿也没关系",
+          "sub": "眼泪是心在给自己洗个澡，哭完就干净了"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅正例1：智能家居（扁平化+按钮+数据绑定）",
+    "mode": "portrait",
+    "description": "空调控制卡片，点击按钮将温度调高到28°C，可观测温度数值变化，垂直居中",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "ac_card",
+            "type": "rect",
+            "pos": [
+              60,
+              940
+            ],
+            "size": [
+              1200,
+              520
+            ],
+            "color": "#E3F2FD",
+            "radius": 40,
+            "padding": 60,
+            "children": [
+              "ac_name",
+              "ac_temp",
+              "status_icon",
+              "divider",
+              "mode_txt",
+              "power_btn"
+            ]
+          },
+          {
+            "id": "ac_name",
+            "type": "text",
+            "pos": [
+              120,
+              1000
+            ],
+            "content": "客厅空调",
+            "fontSize": 56,
+            "color": "#1A237E"
+          },
+          {
+            "id": "ac_temp",
+            "type": "text",
+            "pos": [
+              120,
+              1100
+            ],
+            "content": "26°C",
+            "fontSize": 80,
+            "color": "#0D47A1",
+            "dataPath": "/home/ac/temp"
+          },
+          {
+            "id": "status_icon",
+            "type": "img",
+            "pos": [
+              1040,
+              1000
+            ],
+            "size": [
+              160,
+              160
+            ],
+            "src": "weather/temperature.png"
+          },
+          {
+            "id": "divider",
+            "type": "rect",
+            "pos": [
+              120,
+              1240
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#BBDEFB"
+          },
+          {
+            "id": "mode_txt",
+            "type": "text",
+            "pos": [
+              120,
+              1295
+            ],
+            "content": "当前模式：制冷",
+            "fontSize": 50,
+            "color": "#424242"
+          },
+          {
+            "id": "power_btn",
+            "type": "rect",
+            "pos": [
+              920,
+              1280
+            ],
+            "size": [
+              280,
+              90
+            ],
+            "color": "#1E88E5",
+            "radius": 22,
+            "direction": "horizontal",
+            "align": "center",
+            "justify": "center",
+            "action": "将空调温度调高到28°C",
+            "children": [
+              "btn_txt"
+            ]
+          },
+          {
+            "id": "btn_txt",
+            "type": "text",
+            "content": "调高温度",
+            "fontSize": 42,
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/home/ac",
+        "value": {
+          "temp": "26°C"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅正例2：财务账单（左右分栏+总分总对比）",
+    "mode": "portrait",
+    "description": "财务收支左右分栏对比，总分总结构，双分割线，垂直居中",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "finance_card",
+            "type": "rect",
+            "pos": [
+              60,
+              880
+            ],
+            "size": [
+              1200,
+              620
+            ],
+            "color": "#FFE0B2",
+            "radius": 40,
+            "padding": 60,
+            "children": [
+              "title",
+              "div_top",
+              "icon_in",
+              "txt_in",
+              "icon_out",
+              "txt_out",
+              "div_bottom",
+              "summary"
+            ]
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "pos": [
+              120,
+              940
+            ],
+            "content": "11月财务收支对比",
+            "fontSize": 64,
+            "color": "#E65100"
+          },
+          {
+            "id": "div_top",
+            "type": "rect",
+            "pos": [
+              120,
+              1040
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#FFCC80"
+          },
+          {
+            "id": "icon_in",
+            "type": "img",
+            "pos": [
+              120,
+              1090
+            ],
+            "size": [
+              120,
+              120
+            ],
+            "src": "finance/fund.png"
+          },
+          {
+            "id": "txt_in",
+            "type": "text",
+            "pos": [
+              260,
+              1095
+            ],
+            "content": "总收入\n¥ 18,500",
+            "fontSize": 52,
+            "color": "#2E7D32"
+          },
+          {
+            "id": "icon_out",
+            "type": "img",
+            "pos": [
+              720,
+              1090
+            ],
+            "size": [
+              120,
+              120
+            ],
+            "src": "finance/bill.png"
+          },
+          {
+            "id": "txt_out",
+            "type": "text",
+            "pos": [
+              860,
+              1095
+            ],
+            "content": "总支出\n¥ 6,200",
+            "fontSize": 52,
+            "color": "#C62828"
+          },
+          {
+            "id": "div_bottom",
+            "type": "rect",
+            "pos": [
+              120,
+              1280
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#FFCC80"
+          },
+          {
+            "id": "summary",
+            "type": "text",
+            "pos": [
+              120,
+              1340
+            ],
+            "content": "总结：本月结余良好，储蓄目标达成！",
+            "fontSize": 54,
+            "color": "#4E342E"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅正例3：多容器瀑布流（横向流式图文）",
+    "mode": "portrait",
+    "description": "两个通知卡片上下分布，横向流式排布图文，垂直居中",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "card_weather",
+            "type": "rect",
+            "pos": [
+              60,
+              820
+            ],
+            "size": [
+              1200,
+              380
+            ],
+            "color": "#FFE0B2",
+            "radius": 30,
+            "padding": 55,
+            "direction": "horizontal",
+            "gap": 45,
+            "align": "center",
+            "children": [
+              "w_icon",
+              "w_text"
+            ]
+          },
+          {
+            "id": "w_icon",
+            "type": "img",
+            "size": [
+              160,
+              160
+            ],
+            "src": "weather/rain.png"
+          },
+          {
+            "id": "w_text",
+            "type": "text",
+            "content": "今日有小雨，出门请记得带伞",
+            "fontSize": 54,
+            "color": "#E65100"
+          },
+          {
+            "id": "card_meeting",
+            "type": "rect",
+            "pos": [
+              60,
+              1250
+            ],
+            "size": [
+              1200,
+              380
+            ],
+            "color": "#C5CAE9",
+            "radius": 30,
+            "padding": 55,
+            "direction": "horizontal",
+            "gap": 45,
+            "align": "center",
+            "children": [
+              "m_icon",
+              "m_text"
+            ]
+          },
+          {
+            "id": "m_icon",
+            "type": "img",
+            "size": [
+              160,
+              160
+            ],
+            "src": "office/meeting.png"
+          },
+          {
+            "id": "m_text",
+            "type": "text",
+            "content": "下午 2:00 有产品需求评审会",
+            "fontSize": 54,
+            "color": "#283593"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅正例4：上下分栏排版（商品详情展示）",
+    "mode": "portrait",
+    "description": "上半部分商品大图，下半部分文字信息，同层级pos计算",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "product_card",
+            "type": "rect",
+            "pos": [
+              60,
+              600
+            ],
+            "size": [
+              1200,
+              1200
+            ],
+            "color": "#FFFFFF",
+            "radius": 40,
+            "padding": 60,
+            "children": [
+              "top_img",
+              "mid_divider",
+              "bot_title",
+              "bot_price"
+            ]
+          },
+          {
+            "id": "top_img",
+            "type": "img",
+            "pos": [
+              120,
+              660
+            ],
+            "size": [
+              1080,
+              700
+            ],
+            "src": "shopping/order.png",
+            "radius": 20
+          },
+          {
+            "id": "mid_divider",
+            "type": "rect",
+            "pos": [
+              120,
+              1420
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#EEEEEE"
+          },
+          {
+            "id": "bot_title",
+            "type": "text",
+            "pos": [
+              120,
+              1480
+            ],
+            "content": "旗舰级降噪蓝牙耳机",
+            "fontSize": 64,
+            "color": "#212121"
+          },
+          {
+            "id": "bot_price",
+            "type": "text",
+            "pos": [
+              120,
+              1580
+            ],
+            "content": "¥ 1,299",
+            "fontSize": 72,
+            "color": "#D32F2F"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "❌反例：无色容器嵌套、吸顶与重叠",
+    "mode": "portrait",
+    "description": "wrapper_node无color纯布局节点(违规)，card Y=200未垂直居中，bad_text2与前面元素重叠",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "card",
+            "type": "rect",
+            "pos": [
+              60,
+              200
+            ],
+            "size": [
+              1200,
+              300
+            ],
+            "color": "#FFE082",
+            "padding": 40,
+            "children": [
+              "wrapper_node",
+              "bad_text2"
+            ]
+          },
+          {
+            "id": "wrapper_node",
+            "type": "rect",
+            "direction": "horizontal",
+            "children": [
+              "text1"
+            ]
+          },
+          {
+            "id": "text1",
+            "type": "text",
+            "content": "内容一",
+            "fontSize": 60,
+            "color": "#000000"
+          },
+          {
+            "id": "bad_text2",
+            "type": "text",
+            "pos": [
+              160,
+              270
+            ],
+            "content": "内容二",
+            "fontSize": 60,
+            "color": "#000000"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅横屏：杂志风-励志金句",
+    "mode": "landscape",
+    "description": "左对齐+大符号装饰+分割线+标签色块",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2848,
+              1320
+            ],
+            "src": "backgrounds-landscape/bokeh.jpg",
+            "children": [
+              "quote",
+              "body",
+              "divider",
+              "label",
+              "author"
+            ]
+          },
+          {
+            "id": "quote",
+            "type": "text",
+            "pos": [
+              180,
+              150
+            ],
+            "content": "“",
+            "fontSize": 350,
+            "color": "#30FFFFFF"
+          },
+          {
+            "id": "body",
+            "type": "text",
+            "pos": [
+              250,
+              450
+            ],
+            "content": "别在最能吃苦的年纪，\n选择了安逸。",
+            "fontSize": 85,
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "divider",
+            "type": "rect",
+            "pos": [
+              250,
+              750
+            ],
+            "size": [
+              150,
+              6
+            ],
+            "color": "#FFE082",
+            "radius": 2
+          },
+          {
+            "id": "label",
+            "type": "text",
+            "pos": [
+              250,
+              810
+            ],
+            "content": "COURAGE",
+            "fontSize": 36,
+            "color": "#FFE082"
+          },
+          {
+            "id": "author",
+            "type": "text",
+            "pos": [
+              430,
+              810
+            ],
+            "content": "—— 致奋斗的你",
+            "fontSize": 40,
+            "color": "#CCCCCC"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅横屏：古风-静夜思",
+    "mode": "landscape",
+    "description": "居中排版+山景背景+分割线",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2848,
+              1320
+            ],
+            "src": "backgrounds-landscape/mountain.jpg",
+            "children": [
+              "title",
+              "poem",
+              "divider",
+              "author"
+            ]
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "pos": [
+              780,
+              320
+            ],
+            "content": "《静夜思》",
+            "fontSize": 90,
+            "color": "#E0E0E0"
+          },
+          {
+            "id": "poem",
+            "type": "text",
+            "pos": [
+              780,
+              520
+            ],
+            "content": "床前明月光， 疑是地上霜。\n举头望明月， 低头思故乡。",
+            "fontSize": 70,
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "divider",
+            "type": "rect",
+            "pos": [
+              840,
+              870
+            ],
+            "size": [
+              500,
+              4
+            ],
+            "color": "#FFE082"
+          },
+          {
+            "id": "author",
+            "type": "text",
+            "pos": [
+              920,
+              940
+            ],
+            "content": "唐 · 李白",
+            "fontSize": 45,
+            "color": "#A0A0A0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅横屏：治愈系-暖心话",
+    "mode": "landscape",
+    "description": "暖色调+大面积留白+右对齐+爱心水印",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2848,
+              1320
+            ],
+            "src": "backgrounds-landscape/starry-sky.jpg",
+            "children": [
+              "heart",
+              "body",
+              "divider",
+              "author"
+            ]
+          },
+          {
+            "id": "heart",
+            "type": "text",
+            "pos": [
+              1500,
+              150
+            ],
+            "content": "♥",
+            "fontSize": 400,
+            "color": "#25FFFFFF"
+          },
+          {
+            "id": "body",
+            "type": "text",
+            "pos": [
+              1100,
+              400
+            ],
+            "content": "你不必rush，\n慢慢来也是一种勇气。",
+            "fontSize": 85,
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "divider",
+            "type": "rect",
+            "pos": [
+              1100,
+              680
+            ],
+            "size": [
+              120,
+              6
+            ],
+            "color": "#FAD0C4",
+            "radius": 2
+          },
+          {
+            "id": "author",
+            "type": "text",
+            "pos": [
+              1100,
+              750
+            ],
+            "content": "—— 送给自己",
+            "fontSize": 45,
+            "color": "#DDDDDD"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅横屏：治愈灵感-精简版",
+    "mode": "landscape",
+    "description": "精简token：完整元素，修复颜色对比",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2848,
+              1320
+            ],
+            "src": "backgrounds-landscape/beach-sunrise.jpg",
+            "children": [
+              "date_area",
+              "time_tag",
+              "quote_text",
+              "sub_text",
+              "status_bar",
+              "refresh_btn",
+              "fav_btn"
+            ]
+          },
+          {
+            "id": "date_area",
+            "type": "rect",
+            "pos": [
+              1114,
+              70
+            ],
+            "size": [
+              620,
+              130
+            ],
+            "color": "#401A237E",
+            "radius": 65,
+            "padding": [
+              0,
+              34,
+              0,
+              34
+            ],
+            "direction": "horizontal",
+            "gap": 18,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "date_icon",
+              "date_text"
+            ]
+          },
+          {
+            "id": "date_icon",
+            "type": "img",
+            "size": [
+              52,
+              52
+            ],
+            "src": "healing/sunrise.png"
+          },
+          {
+            "id": "date_text",
+            "type": "text",
+            "content": "6月7日 周六 07:30",
+            "variant": "h5",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "time_tag",
+            "type": "rect",
+            "pos": [
+              320,
+              315
+            ],
+            "size": [
+              450,
+              108
+            ],
+            "color": "#775BAA8E",
+            "radius": 54,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "time_text"
+            ]
+          },
+          {
+            "id": "time_text",
+            "type": "text",
+            "content": "晨间 · 平静",
+            "variant": "h5",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "quote_text",
+            "type": "text",
+            "pos": [
+              320,
+              500
+            ],
+            "dataPath": "/healing/quote",
+            "variant": "h1",
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 10,
+            "glowIntensity": 0.35
+          },
+          {
+            "id": "sub_text",
+            "type": "text",
+            "pos": [
+              320,
+              820
+            ],
+            "dataPath": "/healing/sub",
+            "variant": "h4",
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 8,
+            "glowIntensity": 0.36
+          },
+          {
+            "id": "status_bar",
+            "type": "rect",
+            "pos": [
+              2418,
+              335
+            ],
+            "size": [
+              360,
+              650
+            ],
+            "color": "#CE93D8",
+            "radius": 110,
+            "glass": true,
+            "padding": [
+              30,
+              28,
+              30,
+              28
+            ],
+            "direction": "vertical",
+            "gap": 34,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "status1",
+              "status2",
+              "status3"
+            ]
+          },
+          {
+            "id": "status1",
+            "type": "rect",
+            "size": [
+              300,
+              165
+            ],
+            "color": "#D8FFC04A",
+            "radius": 82,
+            "padding": [
+              0,
+              22,
+              0,
+              22
+            ],
+            "direction": "horizontal",
+            "gap": 12,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "status1_icon",
+              "status1_text"
+            ]
+          },
+          {
+            "id": "status1_icon",
+            "type": "img",
+            "size": [
+              44,
+              44
+            ],
+            "src": "healing/sparkles.png"
+          },
+          {
+            "id": "status1_text",
+            "type": "text",
+            "content": "能量充沛",
+            "variant": "caption",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "status2",
+            "type": "rect",
+            "size": [
+              300,
+              165
+            ],
+            "color": "#D85BAA8E",
+            "radius": 82,
+            "padding": [
+              0,
+              22,
+              0,
+              22
+            ],
+            "direction": "horizontal",
+            "gap": 12,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "status2_icon",
+              "status2_text"
+            ]
+          },
+          {
+            "id": "status2_icon",
+            "type": "img",
+            "size": [
+              44,
+              44
+            ],
+            "src": "healing/lotus.png"
+          },
+          {
+            "id": "status2_text",
+            "type": "text",
+            "content": "情绪平静",
+            "variant": "caption",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "status3",
+            "type": "rect",
+            "size": [
+              300,
+              165
+            ],
+            "color": "#D8327892",
+            "radius": 82,
+            "padding": [
+              0,
+              22,
+              0,
+              22
+            ],
+            "direction": "horizontal",
+            "gap": 12,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "status3_icon",
+              "status3_text"
+            ]
+          },
+          {
+            "id": "status3_icon",
+            "type": "img",
+            "size": [
+              44,
+              44
+            ],
+            "src": "healing/waves.png"
+          },
+          {
+            "id": "status3_text",
+            "type": "text",
+            "content": "状态放松",
+            "variant": "caption",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "refresh_btn",
+            "type": "circle",
+            "pos": [
+              1114,
+              960
+            ],
+            "radius": 110,
+            "color": "#D82F9E9B",
+            "direction": "vertical",
+            "gap": 4,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "refresh_icon",
+              "refresh_txt"
+            ],
+            "action": "刷新今日灵感"
+          },
+          {
+            "id": "refresh_icon",
+            "type": "img",
+            "size": [
+              60,
+              60
+            ],
+            "src": "healing/refresh.png"
+          },
+          {
+            "id": "refresh_txt",
+            "type": "text",
+            "content": "刷新",
+            "variant": "body",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "fav_btn",
+            "type": "circle",
+            "pos": [
+              1560,
+              960
+            ],
+            "radius": 110,
+            "color": "#D8B58A1C",
+            "direction": "vertical",
+            "gap": 4,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "fav_icon",
+              "fav_txt"
+            ],
+            "action": "收藏"
+          },
+          {
+            "id": "fav_icon",
+            "type": "img",
+            "size": [
+              60,
+              60
+            ],
+            "src": "healing/bookmark.png"
+          },
+          {
+            "id": "fav_txt",
+            "type": "text",
+            "content": "收藏",
+            "variant": "body",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/healing",
+        "value": {
+          "quote": "把今天过成\n温柔的光",
+          "sub": "慢慢来，答案会在路上长出来"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅横屏：治愈灵感-紫粉pill版",
+    "mode": "landscape",
+    "description": "暖色背景+克制深色文字+对比色pill+圆形换句按钮",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2848,
+              1320
+            ],
+            "src": "backgrounds-landscape/pastel-warm.jpg",
+            "children": [
+              "mood_tag",
+              "main_quote",
+              "sub_quote",
+              "divider",
+              "status_panel",
+              "action_btn"
+            ]
+          },
+          {
+            "id": "mood_tag",
+            "type": "rect",
+            "pos": [
+              220,
+              180
+            ],
+            "size": [
+              280,
+              90
+            ],
+            "color": "#665D4037",
+            "radius": 45,
+            "direction": "horizontal",
+            "gap": 12,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood_icon",
+              "mood_text"
+            ]
+          },
+          {
+            "id": "mood_icon",
+            "type": "img",
+            "size": [
+              44,
+              44
+            ],
+            "src": "healing/feather.png"
+          },
+          {
+            "id": "mood_text",
+            "type": "text",
+            "content": "柔软时刻",
+            "variant": "body",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "main_quote",
+            "type": "text",
+            "pos": [
+              220,
+              420
+            ],
+            "dataPath": "/healing/quote",
+            "variant": "h1",
+            "color": "#3E2723"
+          },
+          {
+            "id": "sub_quote",
+            "type": "text",
+            "pos": [
+              220,
+              740
+            ],
+            "dataPath": "/healing/sub",
+            "variant": "h4",
+            "color": "#5D4037"
+          },
+          {
+            "id": "divider",
+            "type": "rect",
+            "pos": [
+              220,
+              850
+            ],
+            "size": [
+              800,
+              3
+            ],
+            "color": "#B58A1C"
+          },
+          {
+            "id": "status_panel",
+            "type": "rect",
+            "pos": [
+              220,
+              900
+            ],
+            "size": [
+              800,
+              160
+            ],
+            "color": "#40FFF7E8",
+            "radius": 80,
+            "padding": [
+              0,
+              40,
+              0,
+              40
+            ],
+            "direction": "horizontal",
+            "gap": 30,
+            "align": "center",
+            "justify": "space-around",
+            "children": [
+              "pill1",
+              "pill2",
+              "pill3"
+            ]
+          },
+          {
+            "id": "pill1",
+            "type": "rect",
+            "size": [
+              210,
+              100
+            ],
+            "color": "#C86D8F71",
+            "radius": 50,
+            "padding": [
+              0,
+              18,
+              0,
+              18
+            ],
+            "direction": "horizontal",
+            "gap": 10,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "pill1_icon",
+              "pill1_text"
+            ]
+          },
+          {
+            "id": "pill1_icon",
+            "type": "img",
+            "size": [
+              40,
+              40
+            ],
+            "src": "healing/sunrise.png"
+          },
+          {
+            "id": "pill1_text",
+            "type": "text",
+            "content": "晨光",
+            "variant": "caption",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "pill2",
+            "type": "rect",
+            "size": [
+              210,
+              100
+            ],
+            "color": "#C8B58A1C",
+            "radius": 50,
+            "padding": [
+              0,
+              18,
+              0,
+              18
+            ],
+            "direction": "horizontal",
+            "gap": 10,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "pill2_icon",
+              "pill2_text"
+            ]
+          },
+          {
+            "id": "pill2_icon",
+            "type": "img",
+            "size": [
+              40,
+              40
+            ],
+            "src": "healing/lotus.png"
+          },
+          {
+            "id": "pill2_text",
+            "type": "text",
+            "content": "静心",
+            "variant": "caption",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "pill3",
+            "type": "rect",
+            "size": [
+              210,
+              100
+            ],
+            "color": "#C82F9E9B",
+            "radius": 50,
+            "padding": [
+              0,
+              18,
+              0,
+              18
+            ],
+            "direction": "horizontal",
+            "gap": 10,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "pill3_icon",
+              "pill3_text"
+            ]
+          },
+          {
+            "id": "pill3_icon",
+            "type": "img",
+            "size": [
+              40,
+              40
+            ],
+            "src": "healing/sparkles.png"
+          },
+          {
+            "id": "pill3_text",
+            "type": "text",
+            "content": "微光",
+            "variant": "caption",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "action_btn",
+            "type": "circle",
+            "pos": [
+              2480,
+              560
+            ],
+            "radius": 120,
+            "color": "#D82F9E9B",
+            "direction": "vertical",
+            "gap": 4,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "action_icon",
+              "action_txt"
+            ],
+            "action": "换一句温暖"
+          },
+          {
+            "id": "action_icon",
+            "type": "img",
+            "size": [
+              70,
+              70
+            ],
+            "src": "healing/refresh.png"
+          },
+          {
+            "id": "action_txt",
+            "type": "text",
+            "content": "换句",
+            "variant": "body",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/healing",
+        "value": {
+          "quote": "你本身就是\n一束温柔的光",
+          "sub": "不必追逐太阳，你的存在已足够温暖"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅横屏：极简-坚持感悟",
+    "mode": "landscape",
+    "description": "抽象渐变+居中大词+冷色调极简",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2848,
+              1320
+            ],
+            "src": "backgrounds-landscape/abstract_gradient_4.jpg",
+            "children": [
+              "keyword",
+              "body",
+              "divider",
+              "footer"
+            ]
+          },
+          {
+            "id": "keyword",
+            "type": "text",
+            "pos": [
+              600,
+              320
+            ],
+            "content": "坚持",
+            "fontSize": 120,
+            "color": "#E1BEE7"
+          },
+          {
+            "id": "body",
+            "type": "text",
+            "pos": [
+              600,
+              520
+            ],
+            "content": "所有看似毫不费力的背后，\n都是拼尽全力的付出。",
+            "fontSize": 70,
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "divider",
+            "type": "rect",
+            "pos": [
+              600,
+              790
+            ],
+            "size": [
+              600,
+              6
+            ],
+            "color": "#FFE082"
+          },
+          {
+            "id": "footer",
+            "type": "text",
+            "pos": [
+              600,
+              850
+            ],
+            "content": "每一天的努力都不会白费",
+            "fontSize": 45,
+            "color": "#B0B0B0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：早餐卡片（子元素溢出父容器，需auto-fix）",
+    "mode": "portrait",
+    "description": "卡片高度不足，底部文本溢出卡片下边界，用于测试auto-fix扩展父容器功能",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "meal_card",
+            "type": "rect",
+            "pos": [
+              60,
+              760
+            ],
+            "size": [
+              1200,
+              680
+            ],
+            "color": "#E3F2FD",
+            "radius": 40,
+            "padding": 60,
+            "children": [
+              "title",
+              "icon_protein",
+              "txt_protein",
+              "icon_carbs",
+              "txt_carbs",
+              "divider",
+              "calorie_summary",
+              "fat_summary"
+            ]
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "pos": [
+              120,
+              815
+            ],
+            "content": "高蛋白低碳水早餐计划",
+            "fontSize": 60,
+            "color": "#1A237E"
+          },
+          {
+            "id": "icon_protein",
+            "type": "img",
+            "pos": [
+              180,
+              920
+            ],
+            "size": [
+              160,
+              160
+            ],
+            "src": "food/meat.png"
+          },
+          {
+            "id": "txt_protein",
+            "type": "text",
+            "pos": [
+              370,
+              930
+            ],
+            "content": "优质蛋白：鸡胸肉 120g\n鸡蛋×2 + 希腊酸奶 100g\n合计蛋白质：48g",
+            "fontSize": 48,
+            "color": "#0D47A1"
+          },
+          {
+            "id": "icon_carbs",
+            "type": "img",
+            "pos": [
+              180,
+              1140
+            ],
+            "size": [
+              160,
+              160
+            ],
+            "src": "food/vegetables.png"
+          },
+          {
+            "id": "txt_carbs",
+            "type": "text",
+            "pos": [
+              370,
+              1150
+            ],
+            "content": "低碳水搭配：菠菜+西兰花\n少量番茄+半个牛油果\n合计碳水：18g",
+            "fontSize": 48,
+            "color": "#C62828"
+          },
+          {
+            "id": "divider",
+            "type": "rect",
+            "pos": [
+              120,
+              1360
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#BBDEFB"
+          },
+          {
+            "id": "calorie_summary",
+            "type": "text",
+            "pos": [
+              120,
+              1420
+            ],
+            "content": "总热量：约 420 kcal",
+            "fontSize": 54,
+            "color": "#1B5E20"
+          },
+          {
+            "id": "fat_summary",
+            "type": "text",
+            "pos": [
+              120,
+              1500
+            ],
+            "content": "脂肪含量：16g",
+            "fontSize": 54,
+            "color": "#5D4037"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：早餐卡片（文字溢出，需auto-fix）",
+    "mode": "portrait",
+    "description": "文字溢出父容器，用于测试auto-fix扩展父容器功能",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "breakfast_card",
+            "type": "rect",
+            "pos": [
+              60,
+              700
+            ],
+            "size": [
+              1200,
+              800
+            ],
+            "color": "#E3F2FD",
+            "radius": 40,
+            "padding": 60,
+            "children": [
+              "title",
+              "divider_top",
+              "left_col_title",
+              "left_protein",
+              "left_fat",
+              "left_calorie",
+              "right_col_title",
+              "right_protein",
+              "right_fat",
+              "right_calorie",
+              "divider_bottom",
+              "summary"
+            ]
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "pos": [
+              120,
+              760
+            ],
+            "content": "高蛋白低碳水早餐方案对比",
+            "fontSize": 60,
+            "color": "#1A237E"
+          },
+          {
+            "id": "divider_top",
+            "type": "rect",
+            "pos": [
+              120,
+              840
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#BBDEFB"
+          },
+          {
+            "id": "left_col_title",
+            "type": "text",
+            "pos": [
+              120,
+              895
+            ],
+            "content": "方案一：鸡蛋鸡胸饼\n+ 牛油果半个",
+            "fontSize": 52,
+            "color": "#424242"
+          },
+          {
+            "id": "left_protein",
+            "type": "text",
+            "pos": [
+              120,
+              1040
+            ],
+            "content": "蛋白：32g",
+            "fontSize": 48,
+            "color": "#2E7D32"
+          },
+          {
+            "id": "left_fat",
+            "type": "text",
+            "pos": [
+              120,
+              1110
+            ],
+            "content": "脂肪：28g",
+            "fontSize": 48,
+            "color": "#FF6F00"
+          },
+          {
+            "id": "left_calorie",
+            "type": "text",
+            "pos": [
+              120,
+              1180
+            ],
+            "content": "热量：420kcal",
+            "fontSize": 48,
+            "color": "#D32F2F"
+          },
+          {
+            "id": "right_col_title",
+            "type": "text",
+            "pos": [
+              720,
+              895
+            ],
+            "content": "方案二：希腊酸奶\n+ 坚果混合（15g）",
+            "fontSize": 52,
+            "color": "#424242"
+          },
+          {
+            "id": "right_protein",
+            "type": "text",
+            "pos": [
+              720,
+              1040
+            ],
+            "content": "蛋白：26g",
+            "fontSize": 48,
+            "color": "#2E7D32"
+          },
+          {
+            "id": "right_fat",
+            "type": "text",
+            "pos": [
+              720,
+              1110
+            ],
+            "content": "脂肪：22g",
+            "fontSize": 48,
+            "color": "#FF6F00"
+          },
+          {
+            "id": "right_calorie",
+            "type": "text",
+            "pos": [
+              720,
+              1180
+            ],
+            "content": "热量：380kcal",
+            "fontSize": 48,
+            "color": "#D32F2F"
+          },
+          {
+            "id": "divider_bottom",
+            "type": "rect",
+            "pos": [
+              120,
+              1260
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#BBDEFB"
+          },
+          {
+            "id": "summary",
+            "type": "text",
+            "pos": [
+              120,
+              1320
+            ],
+            "content": "总结：方案一蛋白质更高，适合增肌需求；方案二更便捷，适合快速摄入。",
+            "fontSize": 48,
+            "color": "#1B5E20"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：早餐卡片（竖屏横排场景）",
+    "mode": "portrait",
+    "description": "文字溢出父容器，用于测试auto-fix扩展父容器功能",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "breakfast_card",
+            "type": "rect",
+            "pos": [
+              60,
+              700
+            ],
+            "size": [
+              1200,
+              980
+            ],
+            "color": "#E3F2FD",
+            "radius": 40,
+            "padding": 60,
+            "children": [
+              "title",
+              "divider_top",
+              "left_plan",
+              "right_plan",
+              "img_left",
+              "img_right",
+              "divider_bottom",
+              "summary"
+            ]
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "pos": [
+              120,
+              760
+            ],
+            "content": "高蛋白低碳水早餐方案对比",
+            "fontSize": 64,
+            "color": "#1A237E"
+          },
+          {
+            "id": "divider_top",
+            "type": "rect",
+            "pos": [
+              120,
+              860
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#BBDEFB"
+          },
+          {
+            "id": "left_plan",
+            "type": "text",
+            "pos": [
+              120,
+              920
+            ],
+            "content": "方案一：鸡蛋鸡胸肉卷\n蛋白质：38g\n脂肪：12g\n碳水：6g\n总热量：280kcal\n食材：煎鸡胸肉片×2、鸡蛋×2、菠菜、黑胡椒",
+            "fontSize": 52,
+            "color": "#283593"
+          },
+          {
+            "id": "right_plan",
+            "type": "text",
+            "pos": [
+              680,
+              920
+            ],
+            "content": "方案二：希腊酸奶坚果碗\n蛋白质：35g\n脂肪：15g\n碳水：8g\n总热量：310kcal\n食材：无糖希腊酸奶200g、蛋白粉1勺、奇亚籽10g、蓝莓30g",
+            "fontSize": 52,
+            "color": "#4CAF50"
+          },
+          {
+            "id": "img_left",
+            "type": "img",
+            "pos": [
+              120,
+              1220
+            ],
+            "size": [
+              170,
+              170
+            ],
+            "src": "food/meat.png"
+          },
+          {
+            "id": "img_right",
+            "type": "img",
+            "pos": [
+              680,
+              1220
+            ],
+            "size": [
+              170,
+              170
+            ],
+            "src": "food/grains.png"
+          },
+          {
+            "id": "divider_bottom",
+            "type": "rect",
+            "pos": [
+              120,
+              1380
+            ],
+            "size": [
+              "100%",
+              3
+            ],
+            "color": "#BBDEFB"
+          },
+          {
+            "id": "summary",
+            "type": "text",
+            "pos": [
+              120,
+              1440
+            ],
+            "content": "总结：两方案均满足高蛋白低碳水需求。方案一更贴近传统中式，饱腹感强；方案二便于携带，适合快节奏生活。根据偏好选择。",
+            "fontSize": 50,
+            "color": "#1A237E"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅横屏Glass：玻璃卡片",
+    "mode": "landscape",
+    "description": "横屏玻璃卡片，边缘高光和色散清晰可见",
+    "dsl": [
+      {
+        "type": "img",
+        "pos": [
+          0,
+          0
+        ],
+        "size": [
+          2848,
+          1320
+        ],
+        "src": "backgrounds-landscape/pastel-warm.jpg",
+        "radius": 0
+      },
+      {
+        "type": "text",
+        "pos": [
+          300,
+          500
+        ],
+        "fontSize": 100,
+        "Content": "1234567890987654321234567890987654321",
+        "Color": "#000000"
+      },
+      {
+        "type": "rect",
+        "pos": [
+          400,
+          250
+        ],
+        "size": [
+          1500,
+          750
+        ],
+        "Color": "#B39DDB",
+        "radius": 100,
+        "glass": true
+      },
+      {
+        "type": "text",
+        "pos": [
+          800,
+          600
+        ],
+        "fontSize": 100,
+        "Content": "Liquid Glass",
+        "Color": "#FFFFFF"
+      }
+    ]
+  },
+  {
+    "name": "✅横屏：发光文字效果",
+    "mode": "landscape",
+    "description": "数字发光效果（对标目标图 10:15）：粗字主体 + 边缘柔光晕",
+    "dsl": [
+      {
+        "type": "rect",
+        "pos": [
+          0,
+          0
+        ],
+        "size": [
+          2848,
+          1320
+        ],
+        "Color": "#3B7CB8",
+        "radius": 0
+      },
+      {
+        "type": "text",
+        "pos": [
+          480,
+          250
+        ],
+        "fontSize": 420,
+        "Content": "10:15",
+        "Color": "#BFDFFF",
+        "glowWidth": 4,
+        "glowIntensity": 0.6
+      },
+      {
+        "type": "text",
+        "pos": [
+          200,
+          900
+        ],
+        "fontSize": 160,
+        "Content": "发光文字 Glow 123",
+        "Color": "#FFE4A8",
+        "glowWidth": 4,
+        "glowIntensity": 0.6
+      }
+    ]
+  },
+  {
+    "name": "✅竖屏：streamText 单行流式输出",
+    "mode": "portrait",
+    "description": "文字逐字流式显示，验证单行 streamText 动画效果",
+    "dsl": [
+      {
+        "type": "rect",
+        "pos": [
+          60,
+          900
+        ],
+        "size": [
+          1200,
+          400
+        ],
+        "Color": "#E8EAF6",
+        "radius": 30
+      },
+      {
+        "type": "text",
+        "pos": [
+          120,
+          960
+        ],
+        "fontSize": 48,
+        "Content": "AI 助手回复",
+        "Color": "#1A237E"
+      },
+      {
+        "type": "text",
+        "pos": [
+          120,
+          1060
+        ],
+        "fontSize": 52,
+        "Content": "今天天气晴朗，最高气温28度，适合户外活动。",
+        "Color": "#212121",
+        "streamText": {
+          "speed": 80
+        }
+      }
+    ]
+  },
+  {
+    "name": "✅竖屏：streamText-多行流式输出(废弃)",
+    "mode": "portrait",
+    "description": "英雄联盟攻略长文逐字流式显示，匹配 genui_base_demo 文字属性",
+    "dsl": [
+      {
+        "type": "rect",
+        "pos": [
+          60,
+          300
+        ],
+        "size": [
+          1156,
+          1600
+        ],
+        "Color": "#FFFFFF",
+        "radius": 24
+      },
+      {
+        "type": "text",
+        "pos": [
+          60,
+          120
+        ],
+        "fontSize": 52,
+        "Content": "【英雄联盟攻略】\n\n一、英雄推荐\n• 上单：盖伦（简单粗暴）、诺手（线上强势）、石头人（团战利器）\n• 中单：安妮（操作简单）、玛尔扎哈（推线稳定）、璐璐（辅助型中单）\n• ADC：赏金猎人（团战强力）、艾希（全图支援）、凯特琳（射程远）\n• 辅助：锤石（全能辅助）、蕾欧娜（强开）、索拉卡（治疗）\n• 打野：阿木木（团战大核）、沃里克（续航强）、猪妹（坦控）\n\n二、对线技巧\n1. 补刀是基本功，尽量做到不漏刀\n2. 学会控线：只补最后一刀，把兵线控制在自己塔前\n3. 注意走位，不要被对面消耗太多血量\n4. 观察对面技能CD，技能空窗期是换血的最佳时机\n5. 保持视野，防止被敌方打野Gank\n\n三、团战思路\n• 前排（坦克/战士）：开团或保护后排，吸收伤害\n• 后排（ADC/法师）：保持安全距离，持续输出\n• 辅助：保护核心输出，提供视野和控制\n• 团战前先清视野、做视野，掌握敌方动向\n• 不要一个人追残血，保持队形最重要\n\n四、上分心态\n• 连败时休息一下，不要心态爆炸继续排\n• 每局结束后复盘，思考自己的失误\n• 专注提升自己的操作和意识，少怪队友",
+        "Color": "#212121",
+        "streamText": {
+          "speed": 30,
+          "maxWidth": 1000
+        }
+      }
+    ]
+  },
+  {
+    "name": "✅竖屏：streamText 多行流式输出",
+    "mode": "portrait",
+    "description": "英雄联盟攻略长文逐字流式显示，匹配 genui_base_demo 文字属性",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg_card",
+            "type": "rect",
+            "pos": [
+              60,
+              300
+            ],
+            "size": [
+              1156,
+              1600
+            ],
+            "color": "#FFFFFF",
+            "radius": 24,
+            "children": [
+              "stream_text"
+            ]
+          },
+          {
+            "id": "stream_text",
+            "type": "text",
+            "pos": [
+              60,
+              120
+            ],
+            "content": "【英雄联盟攻略】\n\n一、英雄推荐\n• 上单：盖伦（简单粗暴）、诺手（线上强势）、石头人（团战利器）\n• 中单：安妮（操作简单）、玛尔扎哈（推线稳定）、璐璐（辅助型中单）\n• ADC：赏金猎人（团战强力）、艾希（全图支援）、凯特琳（射程远）\n• 辅助：锤石（全能辅助）、蕾欧娜（强开）、索拉卡（治疗）\n• 打野：阿木木（团战大核）、沃里克（续航强）、猪妹（坦控）\n\n二、对线技巧\n1. 补刀是基本功，尽量做到不漏刀\n2. 学会控线：只补最后一刀，把兵线控制在自己塔前\n3. 注意走位，不要被对面消耗太多血量\n4. 观察对面技能CD，技能空窗期是换血的最佳时机\n5. 保持视野，防止被敌方打野Gank\n\n三、团战思路\n• 前排（坦克/战士）：开团或保护后排，吸收伤害\n• 后排（ADC/法师）：保持安全距离，持续输出\n• 辅助：保护核心输出，提供视野和控制\n• 团战前先清视野、做视野，掌握敌方动向\n• 不要一个人追残血，保持队形最重要\n\n四、上分心态\n• 连败时休息一下，不要心态爆炸继续排\n• 每局结束后复盘，思考自己的失误\n• 专注提升自己的操作和意识，少怪队友",
+            "fontSize": 52,
+            "color": "#212121",
+            "streamText": {
+              "speed": 30,
+              "maxWidth": 1000
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅横屏：streamText 流式输出",
+    "mode": "landscape",
+    "description": "横屏文字逐字流式显示，验证 streamText 动画效果",
+    "dsl": [
+      {
+        "type": "rect",
+        "pos": [
+          0,
+          0
+        ],
+        "size": [
+          2848,
+          1320
+        ],
+        "Color": "#1A237E",
+        "radius": 0
+      },
+      {
+        "type": "text",
+        "pos": [
+          200,
+          300
+        ],
+        "fontSize": 80,
+        "Content": "AI Stream Text",
+        "Color": "#BFDFFF"
+      },
+      {
+        "type": "text",
+        "pos": [
+          200,
+          450
+        ],
+        "fontSize": 60,
+        "Content": "Hello World, this is a typewriter effect demo for stream text rendering.",
+        "Color": "#FFFFFF",
+        "streamText": {
+          "speed": 60,
+          "maxWidth": 2000
+        }
+      }
+    ]
+  },
+  {
+    "name": "✅竖屏：streamText Markdown流式渲染",
+    "mode": "portrait",
+    "description": "Markdown格式文字逐字流式显示，支持标题、加粗、斜体、行内代码、列表、引用等",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg_card",
+            "type": "rect",
+            "pos": [
+              60,
+              300
+            ],
+            "size": [
+              1156,
+              2200
+            ],
+            "color": "#FFFFFF",
+            "radius": 24,
+            "children": [
+              "md_text"
+            ]
+          },
+          {
+            "id": "md_text",
+            "type": "text",
+            "pos": [
+              60,
+              120
+            ],
+            "content": "> #### The quarterly results look great!\n>\n> - Revenue was off the chart.\n> - Profits were higher than ever.\n>\n>  *Everything* is going according to **plan**.",
+            "fontSize": 52,
+            "color": "#212121",
+            "streamText": {
+              "speed": 30,
+              "maxWidth": 1000,
+              "markdown": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：MD标题+粗体+斜体+行内代码",
+    "mode": "portrait",
+    "description": "验证H1-H6标题、粗体、斜体、粗斜体、行内代码渲染",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg_card",
+            "type": "rect",
+            "pos": [
+              60,
+              60
+            ],
+            "size": [
+              1156,
+              2700
+            ],
+            "color": "#FFFFFF",
+            "radius": 24,
+            "children": [
+              "md_text"
+            ]
+          },
+          {
+            "id": "md_text",
+            "type": "text",
+            "pos": [
+              60,
+              120
+            ],
+            "content": "# 一级标题\n## 二级标题\n### 三级标题\n#### 四级标题\n##### 五级标题\n###### 六级标题\n\n这是**粗体文字**，这是*斜体文字*，这是***粗斜体文字***。\n\n行内代码示例：`console.log(\"hello\")`",
+            "fontSize": 48,
+            "color": "#212121",
+            "streamText": {
+              "speed": 60,
+              "maxWidth": 1000,
+              "markdown": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：MD代码块+列表+分割线",
+    "mode": "portrait",
+    "description": "验证代码块、无序列表、有序列表、分割线渲染",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg_card",
+            "type": "rect",
+            "pos": [
+              60,
+              60
+            ],
+            "size": [
+              1156,
+              2700
+            ],
+            "color": "#FFFFFF",
+            "radius": 24,
+            "children": [
+              "md_text"
+            ]
+          },
+          {
+            "id": "md_text",
+            "type": "text",
+            "pos": [
+              60,
+              120
+            ],
+            "content": "```\nfunction hello() {\n  return \"world\";\n}\n```\n\n- 无序列表项1\n- 无序列表项2\n- 无序列表项3\n\n1. 有序列表项1\n2. 有序列表项2\n\n---\n分割线以上",
+            "fontSize": 48,
+            "color": "#212121",
+            "streamText": {
+              "speed": 60,
+              "maxWidth": 1000,
+              "markdown": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：MD引用+嵌套引用",
+    "mode": "portrait",
+    "description": "验证单层引用、嵌套引用、引用内包含其他元素",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg_card",
+            "type": "rect",
+            "pos": [
+              60,
+              60
+            ],
+            "size": [
+              1156,
+              2000
+            ],
+            "color": "#FFFFFF",
+            "radius": 24,
+            "children": [
+              "md_text"
+            ]
+          },
+          {
+            "id": "md_text",
+            "type": "text",
+            "pos": [
+              60,
+              120
+            ],
+            "content": "> 这是第一层引用\n>\n> > 这是嵌套的第二层引用\n>\n> 回到第一层\n\n引用外部的段落文字",
+            "fontSize": 48,
+            "color": "#212121",
+            "streamText": {
+              "speed": 60,
+              "maxWidth": 1000,
+              "markdown": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：MD表格渲染",
+    "mode": "portrait",
+    "description": "验证Markdown表格语法渲染：表头、数据行、网格线",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg_card",
+            "type": "rect",
+            "pos": [
+              60,
+              60
+            ],
+            "size": [
+              1156,
+              2000
+            ],
+            "color": "#FFFFFF",
+            "radius": 24,
+            "children": [
+              "md_text"
+            ]
+          },
+          {
+            "id": "md_text",
+            "type": "text",
+            "pos": [
+              60,
+              120
+            ],
+            "content": "## 用户信息表\n\n| 姓名 | 角色 | 状态 |\n| --- | --- | --- |\n| 张三 | 开发者 | 在线 |\n| 李四 | 设计师 | 离线 |\n| 王五 | 产品经理 | 在线 |\n\n表格以上是标题，表格下方是段落。",
+            "fontSize": 48,
+            "color": "#212121",
+            "streamText": {
+              "speed": 60,
+              "maxWidth": 1000,
+              "markdown": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：MD表格对齐",
+    "mode": "portrait",
+    "description": "验证表格列对齐：左对齐、居中、右对齐",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg_card",
+            "type": "rect",
+            "pos": [
+              60,
+              60
+            ],
+            "size": [
+              1156,
+              2000
+            ],
+            "color": "#FFFFFF",
+            "radius": 24,
+            "children": [
+              "md_text"
+            ]
+          },
+          {
+            "id": "md_text",
+            "type": "text",
+            "pos": [
+              60,
+              120
+            ],
+            "content": "## 列对齐测试\n\n| 左对齐 | 居中 | 右对齐 |\n| :--- | :---: | ---: |\n| Left | Center | Right |\n| 100 | 200 | 300 |\n| A | B | C |",
+            "fontSize": 48,
+            "color": "#212121",
+            "streamText": {
+              "speed": 60,
+              "maxWidth": 1000,
+              "markdown": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅竖屏：MD综合测试(全格式)",
+    "mode": "portrait",
+    "description": "一次性测试所有Markdown格式：标题、粗体、斜体、代码、列表、引用、表格、分割线",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg_card",
+            "type": "rect",
+            "pos": [
+              60,
+              0
+            ],
+            "size": [
+              1156,
+              2800
+            ],
+            "color": "#FFFFFF",
+            "radius": 24,
+            "children": [
+              "md_text"
+            ]
+          },
+          {
+            "id": "md_text",
+            "type": "text",
+            "pos": [
+              60,
+              120
+            ],
+            "content": "# Markdown 全格式测试\n\n## 内联样式\n这是**粗体**，这是*斜体*，这是***粗斜体***，这是`行内代码`。\n\n## 列表\n- 列表项A\n- 列表项B\n- 列表项C\n\n## 引用\n> 这是一段引用文字\n> 包含**粗体**和*斜体*\n\n## 代码块\n```\nint main() {\n    return 0;\n}\n```\n\n## 表格\n| 功能 | 状态 | 备注 |\n| --- | --- | --- |\n| 标题 | OK | H1-H6 |\n| 粗体 | OK | **bold** |\n| 表格 | OK | 网格线 |\n\n---\n测试结束。",
+            "fontSize": 44,
+            "color": "#212121",
+            "streamText": {
+              "speed": 80,
+              "maxWidth": 1000,
+              "markdown": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "✅横屏：治愈灵感-AutoFix长文避让",
+    "mode": "landscape",
+    "description": "验证无换行长 quote 与右侧 mood_bar 重叠时能换行/缩放并避让右侧栏，同时验证短 mood_tag 优先扩宽而不是丑换行",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2832,
+              1280
+            ],
+            "src": "backgrounds-landscape/starry-sky.jpg",
+            "children": [
+              "date_bar",
+              "mood_tag",
+              "quote_text",
+              "sub_text",
+              "mood_bar",
+              "action_btn"
+            ]
+          },
+          {
+            "id": "date_bar",
+            "type": "rect",
+            "pos": [
+              200,
+              80
+            ],
+            "size": [
+              680,
+              140
+            ],
+            "color": "#40FFFFFF",
+            "radius": 70,
+            "glass": true,
+            "padding": [
+              0,
+              40,
+              0,
+              40
+            ],
+            "direction": "horizontal",
+            "gap": 20,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "date_icon",
+              "date_text"
+            ]
+          },
+          {
+            "id": "date_icon",
+            "type": "img",
+            "size": [
+              58,
+              58
+            ],
+            "src": "healing/moon.png"
+          },
+          {
+            "id": "date_text",
+            "type": "text",
+            "content": "6月6日 · 周六 16:44 晴",
+            "variant": "h5",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "mood_tag",
+            "type": "rect",
+            "pos": [
+              200,
+              280
+            ],
+            "size": [
+              340,
+              90
+            ],
+            "color": "#B4263823",
+            "radius": 45,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood_tag_text"
+            ]
+          },
+          {
+            "id": "mood_tag_text",
+            "type": "text",
+            "content": "疲惫 · 补一点能量",
+            "variant": "h5",
+            "color": "#FFF7E8"
+          },
+          {
+            "id": "quote_text",
+            "type": "text",
+            "pos": [
+              280,
+              380
+            ],
+            "dataPath": "/healing/quote",
+            "variant": "h1",
+            "color": "#FFFFFF",
+            "shadow": true,
+            "glowWidth": 5,
+            "glowIntensity": 0.18
+          },
+          {
+            "id": "sub_text",
+            "type": "text",
+            "pos": [
+              280,
+              720
+            ],
+            "dataPath": "/healing/sub",
+            "variant": "h4",
+            "color": "#FFE082",
+            "shadow": true,
+            "glowWidth": 4,
+            "glowIntensity": 0.14
+          },
+          {
+            "id": "mood_bar",
+            "type": "rect",
+            "pos": [
+              2150,
+              320
+            ],
+            "size": [
+              500,
+              680
+            ],
+            "color": "#40FFFFFF",
+            "radius": 100,
+            "glass": true,
+            "padding": [
+              30,
+              30,
+              30,
+              30
+            ],
+            "direction": "vertical",
+            "gap": 30,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1",
+              "mood2",
+              "mood3"
+            ]
+          },
+          {
+            "id": "mood1",
+            "type": "rect",
+            "size": [
+              420,
+              170
+            ],
+            "color": "#B3FFE082",
+            "radius": 85,
+            "direction": "horizontal",
+            "gap": 16,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1_icon",
+              "mood1_text"
+            ]
+          },
+          {
+            "id": "mood1_icon",
+            "type": "img",
+            "size": [
+              52,
+              52
+            ],
+            "src": "healing/sparkles.png"
+          },
+          {
+            "id": "mood1_text",
+            "type": "text",
+            "content": "降低负荷",
+            "variant": "body",
+            "color": "#1A237E"
+          },
+          {
+            "id": "mood2",
+            "type": "rect",
+            "size": [
+              420,
+              170
+            ],
+            "color": "#B3FFFFFF",
+            "radius": 85,
+            "direction": "horizontal",
+            "gap": 16,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood2_icon",
+              "mood2_text"
+            ]
+          },
+          {
+            "id": "mood2_icon",
+            "type": "img",
+            "size": [
+              52,
+              52
+            ],
+            "src": "healing/leaf.png"
+          },
+          {
+            "id": "mood2_text",
+            "type": "text",
+            "content": "补一点能量",
+            "variant": "body",
+            "color": "#1A237E"
+          },
+          {
+            "id": "mood3",
+            "type": "rect",
+            "size": [
+              420,
+              170
+            ],
+            "color": "#B3E1BEE7",
+            "radius": 85,
+            "direction": "horizontal",
+            "gap": 16,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood3_icon",
+              "mood3_text"
+            ]
+          },
+          {
+            "id": "mood3_icon",
+            "type": "img",
+            "size": [
+              52,
+              52
+            ],
+            "src": "healing/heart.png"
+          },
+          {
+            "id": "mood3_text",
+            "type": "text",
+            "content": "今天够好了",
+            "variant": "body",
+            "color": "#1A237E"
+          },
+          {
+            "id": "action_btn",
+            "type": "circle",
+            "pos": [
+              1390,
+              950
+            ],
+            "radius": 125,
+            "color": "#D8FFE082",
+            "direction": "vertical",
+            "gap": 6,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "action_icon",
+              "action_txt"
+            ],
+            "action": "换一句坚持箴言"
+          },
+          {
+            "id": "action_icon",
+            "type": "img",
+            "size": [
+              66,
+              66
+            ],
+            "src": "healing/refresh.png"
+          },
+          {
+            "id": "action_txt",
+            "type": "text",
+            "content": "换句",
+            "variant": "body",
+            "color": "#1A237E"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/healing",
+        "value": {
+          "quote": "再长的路，一步步也能走完；再短的路，不迈开双脚也无法到达。",
+          "sub": "坚持，是通往梦想的唯一捷径。"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅PC横屏：情绪心灵鸡汤-情绪标签展示",
+    "mode": "landscape",
+    "description": "3296x2472 PC大画布情绪心灵鸡汤：日期天气玻璃bar + 情绪标签pill + 主句副句 + 右侧情绪bar + 换句按钮",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              3296,
+              2472
+            ],
+            "src": "backgrounds-landscape/beach-sunrise.jpg",
+            "children": [
+              "date_bar",
+              "emotion_tag",
+              "quote_text",
+              "sub_text",
+              "mood_bar",
+              "refresh_btn"
+            ]
+          },
+          {
+            "id": "date_bar",
+            "type": "rect",
+            "pos": [
+              240,
+              140
+            ],
+            "size": [
+              980,
+              172
+            ],
+            "color": "#401A237E",
+            "radius": 86,
+            "glass": true,
+            "padding": [
+              0,
+              44,
+              0,
+              44
+            ],
+            "direction": "horizontal",
+            "gap": 22,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "date_icon",
+              "date_text"
+            ]
+          },
+          {
+            "id": "date_icon",
+            "type": "img",
+            "size": [
+              68,
+              68
+            ],
+            "src": "healing/sunrise.png"
+          },
+          {
+            "id": "date_text",
+            "type": "text",
+            "content": "6月8日 · 周日 10:00 晴",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "emotion_tag",
+            "type": "rect",
+            "pos": [
+              240,
+              380
+            ],
+            "size": [
+              480,
+              140
+            ],
+            "color": "#D8E65100",
+            "radius": 70,
+            "direction": "horizontal",
+            "gap": 16,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "emotion_icon",
+              "emotion_label"
+            ]
+          },
+          {
+            "id": "emotion_icon",
+            "type": "img",
+            "size": [
+              64,
+              64
+            ],
+            "src": "healing/heart.png"
+          },
+          {
+            "id": "emotion_label",
+            "type": "text",
+            "content": "伤心",
+            "variant": "h3",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "quote_text",
+            "type": "text",
+            "pos": [
+              300,
+              680
+            ],
+            "dataPath": "/healing/quote",
+            "variant": "h1",
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 5,
+            "glowIntensity": 0.18
+          },
+          {
+            "id": "sub_text",
+            "type": "text",
+            "pos": [
+              306,
+              1160
+            ],
+            "dataPath": "/healing/sub",
+            "variant": "h3",
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 4,
+            "glowIntensity": 0.14
+          },
+          {
+            "id": "mood_bar",
+            "type": "rect",
+            "pos": [
+              2420,
+              460
+            ],
+            "size": [
+              650,
+              1200
+            ],
+            "color": "#40FFFFFF",
+            "radius": 160,
+            "glass": true,
+            "padding": [
+              42,
+              40,
+              42,
+              40
+            ],
+            "direction": "vertical",
+            "gap": 42,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1",
+              "mood2",
+              "mood3"
+            ]
+          },
+          {
+            "id": "mood1",
+            "type": "rect",
+            "size": [
+              540,
+              220
+            ],
+            "color": "#B3FFE082",
+            "radius": 110,
+            "direction": "horizontal",
+            "gap": 20,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1_icon",
+              "mood1_text"
+            ]
+          },
+          {
+            "id": "mood1_icon",
+            "type": "img",
+            "size": [
+              64,
+              64
+            ],
+            "src": "healing/heart.png"
+          },
+          {
+            "id": "mood1_text",
+            "type": "text",
+            "content": "允许难过",
+            "variant": "h4",
+            "color": "#1A237E"
+          },
+          {
+            "id": "mood2",
+            "type": "rect",
+            "size": [
+              540,
+              220
+            ],
+            "color": "#B3FFFFFF",
+            "radius": 110,
+            "direction": "horizontal",
+            "gap": 20,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood2_icon",
+              "mood2_text"
+            ]
+          },
+          {
+            "id": "mood2_icon",
+            "type": "img",
+            "size": [
+              64,
+              64
+            ],
+            "src": "healing/feather.png"
+          },
+          {
+            "id": "mood2_text",
+            "type": "text",
+            "content": "被温柔接住",
+            "variant": "h4",
+            "color": "#1A237E"
+          },
+          {
+            "id": "mood3",
+            "type": "rect",
+            "size": [
+              540,
+              220
+            ],
+            "color": "#B3E1BEE7",
+            "radius": 110,
+            "direction": "horizontal",
+            "gap": 20,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood3_icon",
+              "mood3_text"
+            ]
+          },
+          {
+            "id": "mood3_icon",
+            "type": "img",
+            "size": [
+              64,
+              64
+            ],
+            "src": "healing/leaf.png"
+          },
+          {
+            "id": "mood3_text",
+            "type": "text",
+            "content": "慢慢恢复",
+            "variant": "h4",
+            "color": "#1A237E"
+          },
+          {
+            "id": "refresh_btn",
+            "type": "circle",
+            "pos": [
+              1540,
+              1800
+            ],
+            "radius": 160,
+            "color": "#D82F9E9B",
+            "direction": "vertical",
+            "gap": 8,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "refresh_icon",
+              "refresh_txt"
+            ],
+            "action": "换一句安慰的话"
+          },
+          {
+            "id": "refresh_icon",
+            "type": "img",
+            "size": [
+              64,
+              64
+            ],
+            "src": "healing/refresh.png"
+          },
+          {
+            "id": "refresh_txt",
+            "type": "text",
+            "content": "换句",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/healing",
+        "value": {
+          "quote": "世界很大，\n难过一会儿也没关系",
+          "sub": "眼泪是心在给自己洗个澡，哭完就干净了"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅PC横屏：治愈灵感-左文右栏",
+    "mode": "landscape",
+    "description": "3296x2472 PC/平板大画布，验证左侧大字、右侧大玻璃情绪栏和大圆按钮的比例",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              3296,
+              2472
+            ],
+            "src": "backgrounds-landscape/starry-sky.jpg",
+            "children": [
+              "date_bar",
+              "quote_text",
+              "sub_text",
+              "mood_bar",
+              "refresh_btn"
+            ]
+          },
+          {
+            "id": "date_bar",
+            "type": "rect",
+            "pos": [
+              260,
+              160
+            ],
+            "size": [
+              980,
+              172
+            ],
+            "color": "#40FFFFFF",
+            "radius": 86,
+            "glass": true,
+            "padding": [
+              0,
+              44,
+              0,
+              44
+            ],
+            "direction": "horizontal",
+            "gap": 22,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "date_icon",
+              "date_text"
+            ]
+          },
+          {
+            "id": "date_icon",
+            "type": "img",
+            "size": [
+              68,
+              68
+            ],
+            "src": "healing/moon.png"
+          },
+          {
+            "id": "date_text",
+            "type": "text",
+            "content": "6月6日 · 杭州 晴间多云 24°C",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "quote_text",
+            "type": "text",
+            "pos": [
+              300,
+              760
+            ],
+            "dataPath": "/healing/quote",
+            "fontSize": 164,
+            "color": "#FFFFFF",
+            "shadow": true,
+            "glowWidth": 5,
+            "glowIntensity": 0.18
+          },
+          {
+            "id": "sub_text",
+            "type": "text",
+            "pos": [
+              306,
+              1220
+            ],
+            "dataPath": "/healing/sub",
+            "fontSize": 72,
+            "color": "#FFE082",
+            "shadow": true,
+            "glowWidth": 4,
+            "glowIntensity": 0.14
+          },
+          {
+            "id": "mood_bar",
+            "type": "rect",
+            "pos": [
+              2350,
+              650
+            ],
+            "size": [
+              720,
+              960
+            ],
+            "color": "#40FFFFFF",
+            "radius": 120,
+            "glass": true,
+            "padding": [
+              42,
+              40,
+              42,
+              40
+            ],
+            "direction": "vertical",
+            "gap": 42,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1",
+              "mood2",
+              "mood3"
+            ]
+          },
+          {
+            "id": "mood1",
+            "type": "rect",
+            "size": [
+              610,
+              210
+            ],
+            "color": "#B3FFE082",
+            "radius": 105,
+            "direction": "horizontal",
+            "gap": 24,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1_icon",
+              "mood1_text"
+            ]
+          },
+          {
+            "id": "mood1_icon",
+            "type": "img",
+            "size": [
+              68,
+              68
+            ],
+            "src": "healing/sparkles.png"
+          },
+          {
+            "id": "mood1_text",
+            "type": "text",
+            "content": "先稳住",
+            "variant": "h4",
+            "color": "#1A237E"
+          },
+          {
+            "id": "mood2",
+            "type": "rect",
+            "size": [
+              610,
+              210
+            ],
+            "color": "#B3FFFFFF",
+            "radius": 105,
+            "direction": "horizontal",
+            "gap": 24,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood2_icon",
+              "mood2_text"
+            ]
+          },
+          {
+            "id": "mood2_icon",
+            "type": "img",
+            "size": [
+              68,
+              68
+            ],
+            "src": "healing/leaf.png"
+          },
+          {
+            "id": "mood2_text",
+            "type": "text",
+            "content": "慢慢继续",
+            "variant": "h4",
+            "color": "#1A237E"
+          },
+          {
+            "id": "mood3",
+            "type": "rect",
+            "size": [
+              610,
+              210
+            ],
+            "color": "#B3E1BEE7",
+            "radius": 105,
+            "direction": "horizontal",
+            "gap": 24,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood3_icon",
+              "mood3_text"
+            ]
+          },
+          {
+            "id": "mood3_icon",
+            "type": "img",
+            "size": [
+              68,
+              68
+            ],
+            "src": "healing/heart.png"
+          },
+          {
+            "id": "mood3_text",
+            "type": "text",
+            "content": "今天够好了",
+            "variant": "h4",
+            "color": "#1A237E"
+          },
+          {
+            "id": "refresh_btn",
+            "type": "circle",
+            "pos": [
+              1530,
+              1740
+            ],
+            "radius": 160,
+            "color": "#D8FFE082",
+            "direction": "vertical",
+            "gap": 8,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "refresh_icon",
+              "refresh_txt"
+            ],
+            "action": "换一句治愈提醒"
+          },
+          {
+            "id": "refresh_icon",
+            "type": "img",
+            "size": [
+              84,
+              84
+            ],
+            "src": "healing/refresh.png"
+          },
+          {
+            "id": "refresh_txt",
+            "type": "text",
+            "content": "换句",
+            "variant": "h4",
+            "color": "#1A237E"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/healing",
+        "value": {
+          "quote": "再长的路，\n也能一步步走完",
+          "sub": "慢慢来，每一步都算数"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅PC横屏：治愈灵感-居中底部Dock",
+    "mode": "landscape",
+    "description": "3296x2472 PC/平板大画布，验证居中主文案和底部横向 glass dock",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              3296,
+              2472
+            ],
+            "src": "backgrounds-landscape/lake.jpg",
+            "children": [
+              "date_bar",
+              "quote_text",
+              "sub_text",
+              "mood_dock",
+              "refresh_btn"
+            ]
+          },
+          {
+            "id": "date_bar",
+            "type": "rect",
+            "pos": [
+              1160,
+              150
+            ],
+            "size": [
+              980,
+              166
+            ],
+            "color": "#40263238",
+            "radius": 83,
+            "glass": true,
+            "padding": [
+              0,
+              44,
+              0,
+              44
+            ],
+            "direction": "horizontal",
+            "gap": 22,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "date_icon",
+              "date_text"
+            ]
+          },
+          {
+            "id": "date_icon",
+            "type": "img",
+            "size": [
+              64,
+              64
+            ],
+            "src": "healing/waves.png"
+          },
+          {
+            "id": "date_text",
+            "type": "text",
+            "content": "6月6日 · 湖畔微风 · 24°C",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "quote_text",
+            "type": "text",
+            "pos": [
+              930,
+              720
+            ],
+            "dataPath": "/healing/quote",
+            "fontSize": 160,
+            "color": "#FFFFFF",
+            "shadow": true,
+            "glowWidth": 5,
+            "glowIntensity": 0.16,
+            "textAlign": "center"
+          },
+          {
+            "id": "sub_text",
+            "type": "text",
+            "pos": [
+              1040,
+              1140
+            ],
+            "dataPath": "/healing/sub",
+            "fontSize": 70,
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 4,
+            "glowIntensity": 0.12,
+            "textAlign": "center"
+          },
+          {
+            "id": "mood_dock",
+            "type": "rect",
+            "pos": [
+              780,
+              1740
+            ],
+            "size": [
+              1600,
+              250
+            ],
+            "color": "#40FFFFFF",
+            "radius": 125,
+            "glass": true,
+            "padding": [
+              0,
+              42,
+              0,
+              42
+            ],
+            "direction": "horizontal",
+            "gap": 34,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "dock1",
+              "dock2",
+              "dock3"
+            ]
+          },
+          {
+            "id": "dock1",
+            "type": "rect",
+            "size": [
+              420,
+              170
+            ],
+            "color": "#B35BAA8E",
+            "radius": 85,
+            "direction": "horizontal",
+            "gap": 20,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "dock1_icon",
+              "dock1_text"
+            ]
+          },
+          {
+            "id": "dock1_icon",
+            "type": "img",
+            "size": [
+              62,
+              62
+            ],
+            "src": "healing/lotus.png"
+          },
+          {
+            "id": "dock1_text",
+            "type": "text",
+            "content": "放慢呼吸",
+            "variant": "h5",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "dock2",
+            "type": "rect",
+            "size": [
+              420,
+              170
+            ],
+            "color": "#B32F9E9B",
+            "radius": 85,
+            "direction": "horizontal",
+            "gap": 20,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "dock2_icon",
+              "dock2_text"
+            ]
+          },
+          {
+            "id": "dock2_icon",
+            "type": "img",
+            "size": [
+              62,
+              62
+            ],
+            "src": "healing/leaf.png"
+          },
+          {
+            "id": "dock2_text",
+            "type": "text",
+            "content": "心绪舒展",
+            "variant": "h5",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "dock3",
+            "type": "rect",
+            "size": [
+              420,
+              170
+            ],
+            "color": "#B8B58A1C",
+            "radius": 85,
+            "direction": "horizontal",
+            "gap": 20,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "dock3_icon",
+              "dock3_text"
+            ]
+          },
+          {
+            "id": "dock3_icon",
+            "type": "img",
+            "size": [
+              62,
+              62
+            ],
+            "src": "healing/sunrise.png"
+          },
+          {
+            "id": "dock3_text",
+            "type": "text",
+            "content": "温柔补给",
+            "variant": "h5",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "refresh_btn",
+            "type": "circle",
+            "pos": [
+              2580,
+              1685
+            ],
+            "radius": 155,
+            "color": "#D82F9E9B",
+            "direction": "vertical",
+            "gap": 8,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "refresh_icon",
+              "refresh_txt"
+            ],
+            "action": "换一句平静提醒"
+          },
+          {
+            "id": "refresh_icon",
+            "type": "img",
+            "size": [
+              82,
+              82
+            ],
+            "src": "healing/refresh.png"
+          },
+          {
+            "id": "refresh_txt",
+            "type": "text",
+            "content": "换句",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/healing",
+        "value": {
+          "quote": "把心放回风里，\n让答案慢慢浮上来",
+          "sub": "今天不必追赶，先照顾好自己"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅PC横屏：诗词治愈-大屏沉浸",
+    "mode": "landscape",
+    "description": "3296x2472 PC/平板大画布，验证古诗也使用治愈灵感信息层而不是简版排版",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "bg",
+            "type": "img",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              3296,
+              2472
+            ],
+            "src": "backgrounds-landscape/forest.jpg",
+            "children": [
+              "date_bar",
+              "title",
+              "poem_text",
+              "author",
+              "mood_bar",
+              "refresh_btn"
+            ]
+          },
+          {
+            "id": "date_bar",
+            "type": "rect",
+            "pos": [
+              250,
+              150
+            ],
+            "size": [
+              900,
+              166
+            ],
+            "color": "#401B5E20",
+            "radius": 83,
+            "glass": true,
+            "padding": [
+              0,
+              42,
+              0,
+              42
+            ],
+            "direction": "horizontal",
+            "gap": 22,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "date_icon",
+              "date_text"
+            ]
+          },
+          {
+            "id": "date_icon",
+            "type": "img",
+            "size": [
+              66,
+              66
+            ],
+            "src": "healing/leaf.png"
+          },
+          {
+            "id": "date_text",
+            "type": "text",
+            "content": "6月6日 · 林间微雨 · 22°C",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "pos": [
+              300,
+              560
+            ],
+            "content": "春晓",
+            "fontSize": 156,
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 5,
+            "glowIntensity": 0.16
+          },
+          {
+            "id": "poem_text",
+            "type": "text",
+            "pos": [
+              300,
+              820
+            ],
+            "dataPath": "/healing/quote",
+            "fontSize": 116,
+            "color": "#FFF7E8",
+            "shadow": true,
+            "glowWidth": 5,
+            "glowIntensity": 0.16
+          },
+          {
+            "id": "author",
+            "type": "text",
+            "pos": [
+              310,
+              1540
+            ],
+            "content": "唐 · 孟浩然",
+            "variant": "h3",
+            "color": "#FFFFFF",
+            "shadow": true,
+            "glowWidth": 3,
+            "glowIntensity": 0.12
+          },
+          {
+            "id": "mood_bar",
+            "type": "rect",
+            "pos": [
+              2330,
+              620
+            ],
+            "size": [
+              730,
+              920
+            ],
+            "color": "#505BAA8E",
+            "radius": 120,
+            "glass": true,
+            "padding": [
+              42,
+              40,
+              42,
+              40
+            ],
+            "direction": "vertical",
+            "gap": 42,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1",
+              "mood2",
+              "mood3"
+            ]
+          },
+          {
+            "id": "mood1",
+            "type": "rect",
+            "size": [
+              620,
+              200
+            ],
+            "color": "#B41B5E20",
+            "radius": 100,
+            "direction": "horizontal",
+            "gap": 24,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood1_icon",
+              "mood1_text"
+            ]
+          },
+          {
+            "id": "mood1_icon",
+            "type": "img",
+            "size": [
+              66,
+              66
+            ],
+            "src": "healing/sunrise.png"
+          },
+          {
+            "id": "mood1_text",
+            "type": "text",
+            "content": "春意渐醒",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "mood2",
+            "type": "rect",
+            "size": [
+              620,
+              200
+            ],
+            "color": "#B45BAA8E",
+            "radius": 100,
+            "direction": "horizontal",
+            "gap": 24,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood2_icon",
+              "mood2_text"
+            ]
+          },
+          {
+            "id": "mood2_icon",
+            "type": "img",
+            "size": [
+              66,
+              66
+            ],
+            "src": "healing/feather.png"
+          },
+          {
+            "id": "mood2_text",
+            "type": "text",
+            "content": "听风入梦",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "mood3",
+            "type": "rect",
+            "size": [
+              620,
+              200
+            ],
+            "color": "#B8B58A1C",
+            "radius": 100,
+            "direction": "horizontal",
+            "gap": 24,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "mood3_icon",
+              "mood3_text"
+            ]
+          },
+          {
+            "id": "mood3_icon",
+            "type": "img",
+            "size": [
+              66,
+              66
+            ],
+            "src": "healing/sparkles.png"
+          },
+          {
+            "id": "mood3_text",
+            "type": "text",
+            "content": "花落有声",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          },
+          {
+            "id": "refresh_btn",
+            "type": "circle",
+            "pos": [
+              1460,
+              1720
+            ],
+            "radius": 160,
+            "color": "#D82F9E9B",
+            "direction": "vertical",
+            "gap": 8,
+            "align": "center",
+            "justify": "center",
+            "children": [
+              "refresh_icon",
+              "refresh_txt"
+            ],
+            "action": "换一首治愈诗句"
+          },
+          {
+            "id": "refresh_icon",
+            "type": "img",
+            "size": [
+              84,
+              84
+            ],
+            "src": "healing/refresh.png"
+          },
+          {
+            "id": "refresh_txt",
+            "type": "text",
+            "content": "换诗",
+            "variant": "h4",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "updateDataModel": {
+        "path": "/healing",
+        "value": {
+          "quote": "春眠不觉晓，\n处处闻啼鸟。\n夜来风雨声，\n花落知多少。"
+        }
+      }
+    }
+  },
+  {
+    "name": "✅横屏：天气卡片",
+    "mode": "landscape",
+    "description": "全屏天气卡片，蓝色背景铺满，居中布局（2848×1320）",
+    "dsl": {
+      "updateComponents": {
+        "components": [
+          {
+            "id": "root",
+            "type": "rect",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              2848,
+              1320
+            ],
+            "color": "#90CAF9",
+            "children": [
+              "bg_icon",
+              "city",
+              "temp",
+              "detail"
+            ]
+          },
+          {
+            "id": "bg_icon",
+            "type": "img",
+            "pos": [
+              350,
+              300
+            ],
+            "size": [
+              350,
+              350
+            ],
+            "src": "weather/sun.png"
+          },
+          {
+            "id": "city",
+            "type": "text",
+            "pos": [
+              850,
+              350
+            ],
+            "content": "北京市 晴朗",
+            "fontSize": 100,
+            "color": "#0D47A1"
+          },
+          {
+            "id": "temp",
+            "type": "text",
+            "pos": [
+              850,
+              500
+            ],
+            "content": "26°C",
+            "fontSize": 180,
+            "color": "#E65100"
+          },
+          {
+            "id": "detail",
+            "type": "text",
+            "pos": [
+              850,
+              750
+            ],
+            "content": "湿度 45%  |  风力 3级",
+            "fontSize": 70,
+            "color": "#1565C0"
+          }
+        ]
+      }
+    }
+  }
+]

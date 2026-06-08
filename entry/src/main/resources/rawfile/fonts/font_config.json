@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "defaultFont": "default",
+  "fonts": [
+    {
+      "id": "default",
+      "path": "fonts/HarmonyOS_Sans_SC.ttf",
+      "faceIndex": -1,
+      "roles": ["primary"]
+    },
+    {
+      "id": "chinese_fallback",
+      "path": "fonts/msyh.ttc",
+      "faceIndex": -1,
+      "roles": ["chinese_fallback"]
+    },
+    {
+      "id": "bold",
+      "path": "fonts/msyhbd.ttc",
+      "faceIndex": 0,
+      "roles": ["bold"],
+      "fallbackChain": [
+        {"source": "default", "faceIndex": 0}
+      ]
+    }
+  ],
+  "aliases": {
+    "HarmonyOS Sans": "default",
+    "HarmonyOS Sans SC": "default",
+    "HarmonyOS Sans TC": "default",
+    "HarmonyOS Sans Italic": "default",
+    "HarmonyOS Sans SC Italic": "default",
+    "HarmonyOS Sans TC Italic": "default",
+    "HarmonyOS Serif": "default",
+    "HarmonyOS Serif SC": "default",
+    "HarmonyOS Serif TC": "default",
+    "HarmonyOS Serif Italic": "default",
+    "HarmonyOS Serif SC Italic": "default",
+    "HarmonyOS Serif TC Italic": "default",
+    "HarmonyOS Mono": "default",
+    "sans-serif": "default",
+    "serif": "default",
+    "monospace": "default",
+    "cursive": "default",
+    "fantasy": "default",
+    "system-ui": "default",
+    "bold": "bold",
+    "HarmonyOS Sans Bold": "bold",
+    "HarmonyOS Sans SC Bold": "bold",
+    "HarmonyOS Sans TC Bold": "bold"
+  },
+  "loadOrder": ["default", "chinese_fallback", "bold"]
+}

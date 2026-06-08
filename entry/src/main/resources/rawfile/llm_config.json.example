@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://ark.cn-beijing.volces.com/api/v3",
+  "endpoint": "/chat/completions",
+  "apiKey": "your-api-key-here",
+  "model": "your-model-name-here"
+}
