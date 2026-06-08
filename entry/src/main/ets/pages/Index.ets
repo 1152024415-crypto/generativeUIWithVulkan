@@ -355,7 +355,7 @@ struct Index {
       if (typeof snapshotRaw === 'string' && snapshotRaw.length > 0) {
         const snapshot = parseEmotionSnapshot(snapshotRaw);
         this.emotionState = snapshot.emotion;
-        const confidences: Record<string, number> = snapshot.confidences as Record<string, number>;
+        const confidences: Record<string, number> = snapshot.confidences as unknown as Record<string, number>;
         this.emotionDebouncer.push({
           emotion: snapshot.emotion,
           confidence: snapshot.confidence,
