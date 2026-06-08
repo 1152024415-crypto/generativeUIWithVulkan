@@ -116,6 +116,7 @@ struct Index {
   // Preset prompts — set by applyOrientation() based on route params
   @State presetPrompts: SelectOption[] = [
     { value: '自定义' },
+    { value: '我的心情怎么样' },
     { value: '今天北京天气怎么样？' },
     { value: '给我推荐一份减脂健康晚餐' },
     { value: '帮我指定一个早餐计划，高蛋白低碳水，对比一下方案，包括蛋白，脂肪和卡路里等' },
@@ -241,6 +242,7 @@ struct Index {
     if (this.isLandscape) {
       this.presetPrompts = [
         { value: '自定义' },
+        { value: '我的心情怎么样' },
         { value: '给我一句适合现在心情的治愈话' },
         { value: '来一句励志的心灵鸡汤' },
         { value: '给我一句温暖治愈的话' },
@@ -252,6 +254,7 @@ struct Index {
     } else {
       this.presetPrompts = [
         { value: '自定义' },
+        { value: '我的心情怎么样' },
         { value: '今天北京天气怎么样？' },
         { value: '给我推荐一份减脂健康晚餐' },
         { value: '帮我指定一个早餐计划，高蛋白低碳水，对比一下方案，包括蛋白，脂肪和卡路里等' },
