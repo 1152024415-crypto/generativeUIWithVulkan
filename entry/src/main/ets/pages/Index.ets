@@ -86,7 +86,7 @@ struct Index {
   @State emotionState: string = 'neutral';
   @State emotionInitialized: boolean = false;
   @State emotionRunning: boolean = false;
-  private currentEmotionLabel: string = '中性';
+  private currentEmotionLabel: string = '';
 
   xcomponentController: XComponentController = new XComponentController();
   private xComponentContext: Record<string, NativeXComponentMethod> = {};
@@ -390,7 +390,7 @@ struct Index {
     this.emotionRunning = false;
     this.emotionInitialized = false;
     this.emotionDebouncer.reset();
-    this.currentEmotionLabel = '中性';
+    this.currentEmotionLabel = '';
   }
 
   private applyEmotionLabelPatch(snapshot: EmotionSnapshot): void {
@@ -408,6 +408,7 @@ struct Index {
       JSON.stringify(chineseEmotionLabel) + '}}}';
     try {
       this.xComponentContext.parseUIDescriptor(patch);
+      hilog.info(0x0000, 'Index', `[EmotionLabel] synced=${chineseEmotionLabel}`);
     } catch (err) {
       hilog.error(0x0000, 'Index', `[EmotionLabel] failed to patch DSL: ${String((err as Error).message ?? err)}`);
     }
