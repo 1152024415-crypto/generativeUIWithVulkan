@@ -23,7 +23,7 @@ import { DslFormat, getPrompt, getDebugCasesDirName, LANDSCAPE_BG_FILES, ICON_CA
 import { copyAllResourcesIfNeeded } from '../utils/ResourceCopier';
 import { EmotionType, recognizeEmotion } from '../utils/EmotionApi';
 import { EmotionDebouncer, mapFaceEmotionToChinese } from '../utils/EmotionDebouncer';
-import { parseEmotionSnapshot } from '../utils/EmotionDebugTypes';
+import { EmotionConfidenceMap, parseEmotionSnapshot } from '../utils/EmotionDebugTypes';
 
 interface PresetItem {
   name: string;
@@ -355,7 +355,7 @@ struct Index {
       if (typeof snapshotRaw === 'string' && snapshotRaw.length > 0) {
         const snapshot = parseEmotionSnapshot(snapshotRaw);
         this.emotionState = snapshot.emotion;
-        const confidences: Record<string, number> = {
+        const confidences: EmotionConfidenceMap = {
           ecstatic: snapshot.confidences.ecstatic,
           happy: snapshot.confidences.happy,
           neutral: snapshot.confidences.neutral,

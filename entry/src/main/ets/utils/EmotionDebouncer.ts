@@ -1,8 +1,17 @@
 interface NativeEmotionState {
   emotion: string;
   confidence: number;
-  confidences: Record<string, number>;
+  confidences: EmotionConfidenceMap;
   timestamp: number;
+}
+
+interface EmotionConfidenceMap {
+  ecstatic: number;
+  happy: number;
+  neutral: number;
+  sad: number;
+  angry: number;
+  crying: number;
 }
 
 interface EmotionSample {
