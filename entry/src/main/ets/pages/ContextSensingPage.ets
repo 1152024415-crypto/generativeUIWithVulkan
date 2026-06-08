@@ -5,9 +5,12 @@ import {
   RealTimeDataService, RealTimeContext, LocationInfo, WeatherInfo, TimeContext,
   WeeklyHealthStats, NotificationInfo, AppUsageItem, ScheduleItem
 } from '../utils/RealTimeDataService';
-import { parseEmotionSnapshot, EMPTY_EMOTION_SNAPSHOT, EmotionSnapshot, EmotionConfidenceMap } from '../utils/EmotionDebugTypes';
+import { parseEmotionSnapshot, EMPTY_EMOTION_SNAPSHOT, EmotionSnapshot, EmotionConfidenceMap, EmotionRecentEvent } from '../utils/EmotionDebugTypes';
 import { ActivityInfo } from '../utils/ActivityRecognizer';
 import { SceneInfo } from '../utils/SceneDetector';
+import { EmotionLatencyTracker, EmotionLatencyResult, EmotionLatencyStatus } from '../utils/EmotionLatencyTracker';
+
+const EMOTION_OPTIONS: string[] = ['Any change', 'ecstatic', 'happy', 'neutral', 'sad', 'angry', 'crying'];
 
 type EmotionNativeMethod = (...args: Object[]) => string | boolean | void;
 
@@ -50,10 +53,25 @@ struct ContextSensingPage {
   @State notificationInfo: NotificationInfo | null = null;
   @State topApps: AppUsageItem[] = [];
 
+  @State selectedTargetIndex: number = 0;
+  @State countdownText: string = '';
+  @State latencyResult: EmotionLatencyResult = {
+    status: EmotionLatencyStatus.Ready,
+    baselineEmotion: 'neutral',
+    targetEmotion: 'Any change',
+    testStartTimeMs: 0,
+    firstChangeLatencyMs: -1,
+    stableChangeLatencyMs: -1,
+    eventsAfterPrompt: 0
+  };
+
   private xcomponentController: XComponentController = new XComponentController();
   private nativeContext: Record<string, EmotionNativeMethod> = {};
   private emotionPollTimer: number = -1;
   private sensorPollTimer: number = -1;
+  private countdownTimer: number = -1;
+  private countdownValue: number = 0;
+  private latencyTracker: EmotionLatencyTracker = new EmotionLatencyTracker();
 
   aboutToAppear(): void {
     this.initService();
@@ -61,6 +79,7 @@ struct ContextSensingPage {
 
   aboutToDisappear(): void {
     this.stopAllTimers();
+    this.clearCountdown();
     RealTimeDataService.destroy();
   }
 
@@ -85,6 +104,7 @@ struct ContextSensingPage {
       clearInterval(this.sensorPollTimer);
       this.sensorPollTimer = -1;
     }
+    this.clearCountdown();
   }
 
   private refreshEmotion(): void {
@@ -92,7 +112,65 @@ struct ContextSensingPage {
     if (get) {
       const raw = get() as string;
       this.emotionSnapshot = parseEmotionSnapshot(raw);
+      this.latencyResult = this.latencyTracker.update(this.emotionSnapshot);
     }
+  }
+
+  private resetDiagnostics(): void {
+    const reset = this.nativeContext['resetEmotionDiagnostics'];
+    if (reset) {
+      reset();
+    }
+    this.latencyTracker.reset();
+    this.latencyResult = this.latencyTracker.update(this.emotionSnapshot);
+    this.refreshEmotion();
+  }
+
+  private beginExpressionTest(): void {
+    if (!this.emotionSnapshot.running) {
+      this.emotionStatus = 'StartRequired';
+      return;
+    }
+    this.clearCountdown();
+    this.countdownValue = 3;
+    this.countdownText = '3';
+    this.emotionStatus = 'Countdown';
+    this.countdownTimer = setInterval(() => {
+      this.countdownValue--;
+      if (this.countdownValue > 0) {
+        this.countdownText = String(this.countdownValue);
+        return;
+      }
+      this.clearCountdown();
+      this.countdownText = '现在做表情';
+      this.refreshEmotion();
+      this.latencyTracker.begin(this.emotionSnapshot, EMOTION_OPTIONS[this.selectedTargetIndex]);
+      this.latencyResult = this.latencyTracker.update(this.emotionSnapshot);
+      this.emotionStatus = 'WaitingChange';
+    }, 1000);
+  }
+
+  private clearCountdown(): void {
+    if (this.countdownTimer !== -1) {
+      clearInterval(this.countdownTimer);
+      this.countdownTimer = -1;
+    }
+  }
+
+  private formatLatency(value: number): string {
+    return value >= 0 ? `${value} ms` : '-';
+  }
+
+  private callbackRatePerSec(): string {
+    const events = this.emotionSnapshot.recentEvents;
+    if (events.length < 2) {
+      return '0.0/s';
+    }
+    const first = events[0];
+    const last = events[events.length - 1];
+    const durationMs = Math.max(1, last.timeMs - first.timeMs);
+    const rate = (events.length - 1) * 1000 / durationMs;
+    return `${rate.toFixed(1)}/s`;
   }
 
   private startEmotionPolling(): void {
@@ -331,69 +409,13 @@ struct ContextSensingPage {
 
   @Builder EmotionTab() {
     Scroll() {
-      Column({ space: 12 }) {
-        Row({ space: 8 }) {
-          Button('初始化')
-            .height(36).fontSize(13).backgroundColor('#4CAF50').fontColor('#FFF')
-            .onClick(() => {
-              const init = this.nativeContext['initEmotionManager'];
-              if (init) {
-                const ok = init() === true;
-                this.emotionStatus = ok ? '已初始化' : '初始化失败';
-              } else {
-                this.emotionStatus = 'Native不可用';
-              }
-            })
-          Button('开始检测')
-            .height(36).fontSize(13).backgroundColor('#2196F3').fontColor('#FFF')
-            .onClick(() => {
-              const start = this.nativeContext['startEmotionDetection'];
-              if (start) {
-                start();
-                this.emotionStatus = '检测中';
-                this.startEmotionPolling();
-              }
-            })
-          Button('停止')
-            .height(36).fontSize(13).backgroundColor('#FF5722').fontColor('#FFF')
-            .onClick(() => {
-              const stop = this.nativeContext['stopEmotionDetection'];
-              if (stop) stop();
-              if (this.emotionPollTimer !== -1) {
-                clearInterval(this.emotionPollTimer);
-                this.emotionPollTimer = -1;
-              }
-              this.emotionStatus = '已停止';
-            })
-        }
-        .width('100%')
-        .justifyContent(FlexAlign.Center)
-
-        this.InfoCard('状态', this.emotionStatus)
-        this.InfoCard('当前情绪', this.emotionSnapshot.emotion)
-
-        // 置信度
-        Text('置信度分布')
-          .fontSize(14).fontWeight(FontWeight.Bold).margin({ top: 8 })
-        ForEach(this.getConfidenceList(this.emotionSnapshot.confidences), (item: ConfidenceItem) => {
-          Row() {
-            Text(item.emotion)
-              .fontSize(12).width(70)
-            Progress({ value: item.confidence * 100, total: 100 })
-              .layoutWeight(1)
-              .height(12)
-            Text(`${(item.confidence * 100).toFixed(0)}%`)
-              .fontSize(11).width(40).textAlign(TextAlign.End)
-          }
-          .width('100%')
-          .padding({ left: 16, right: 16, top: 2, bottom: 2 })
-        }, (item: ConfidenceItem) => item.emotion)
-
-        this.InfoCard('回调速率', this.emotionSnapshot.recentEvents.length > 0
-          ? `${this.emotionSnapshot.recentEvents.length} events`
-          : '无数据')
-        this.InfoCard('错误阶段', this.emotionSnapshot.lastErrorStage || '无')
-        this.InfoCard('错误信息', this.emotionSnapshot.lastErrorMessage || '无')
+      Column({ space: 14 }) {
+        this.EmotionStatusPanel()
+        this.EmotionActionPanel()
+        this.EmotionConfidencePanel()
+        this.EmotionLatencyPanel()
+        this.EmotionDiagnosticsPanel()
+        this.EmotionHistoryPanel()
       }
       .width('100%')
       .padding(16)
@@ -634,6 +656,358 @@ struct ContextSensingPage {
     .borderRadius(8)
     .shadow({ radius: 1, color: '#08000000', offsetY: 1 })
   }
+
+  @Builder EmotionStatusPanel() {
+    Column({ space: 8 }) {
+      Text('状态')
+        .fontSize(16)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#5F6368')
+      Row() {
+        Text(`页面: ${this.emotionStatus}`)
+          .fontSize(14)
+          .fontColor('#202124')
+          .layoutWeight(1)
+        Text(`数据年龄: ${this.emotionSnapshot.lastDataAgeMs >= 0 ? this.emotionSnapshot.lastDataAgeMs + ' ms' : 'N/A'}`)
+          .fontSize(14)
+          .fontColor('#5F6368')
+      }
+      .width('100%')
+
+      Row({ space: 16 }) {
+        Text(this.emotionSnapshot.emotion)
+          .fontSize(36)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#1A73E8')
+        Text(`${this.emotionSnapshot.confidence}%`)
+          .fontSize(28)
+          .fontWeight(FontWeight.Medium)
+          .fontColor('#34A853')
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.Center)
+    }
+    .width('100%')
+    .padding(16)
+    .borderRadius(12)
+    .backgroundColor('#FFFFFF')
+    .shadow({ radius: 4, color: '#10000000', offsetY: 2 })
+  }
+
+  @Builder EmotionActionPanel() {
+    Row({ space: 10 }) {
+      Button('Init')
+        .height(36)
+        .fontSize(14)
+        .layoutWeight(1)
+        .backgroundColor('#1A73E8')
+        .fontColor('#FFFFFF')
+        .borderRadius(8)
+        .onClick(() => {
+          const init = this.nativeContext['initEmotionManager'];
+          if (init) {
+            const ok = init() === true;
+            this.emotionStatus = ok ? 'Initialized' : 'Error';
+          } else {
+            this.emotionStatus = 'NativeUnavailable';
+          }
+        })
+      Button('Start')
+        .height(36)
+        .fontSize(14)
+        .layoutWeight(1)
+        .backgroundColor('#34A853')
+        .fontColor('#FFFFFF')
+        .borderRadius(8)
+        .onClick(() => {
+          const start = this.nativeContext['startEmotionDetection'];
+          if (start) {
+            const ok = start() === true;
+            this.emotionStatus = ok ? 'Running' : 'Error';
+            if (ok) {
+              this.startEmotionPolling();
+            }
+          } else {
+            this.emotionStatus = 'NativeUnavailable';
+          }
+        })
+      Button('Stop')
+        .height(36)
+        .fontSize(14)
+        .layoutWeight(1)
+        .backgroundColor('#EA4335')
+        .fontColor('#FFFFFF')
+        .borderRadius(8)
+        .onClick(() => {
+          const stop = this.nativeContext['stopEmotionDetection'];
+          if (stop) {
+            stop();
+          }
+          this.emotionStatus = 'Stopped';
+          this.stopAllTimers();
+        })
+      Button('Reset')
+        .height(36)
+        .fontSize(14)
+        .layoutWeight(1)
+        .backgroundColor('#FBBC04')
+        .fontColor('#202124')
+        .borderRadius(8)
+        .onClick(() => {
+          this.resetDiagnostics();
+        })
+    }
+    .width('100%')
+    .padding({ left: 4, right: 4 })
+  }
+
+  @Builder EmotionConfidencePanel() {
+    Column({ space: 6 }) {
+      Text('置信度')
+        .fontSize(16)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#5F6368')
+
+      this.EmotionConfidenceRow('ecstatic', this.emotionSnapshot.confidences.ecstatic, this.emotionSnapshot.emotion === 'ecstatic')
+      this.EmotionConfidenceRow('happy', this.emotionSnapshot.confidences.happy, this.emotionSnapshot.emotion === 'happy')
+      this.EmotionConfidenceRow('neutral', this.emotionSnapshot.confidences.neutral, this.emotionSnapshot.emotion === 'neutral')
+      this.EmotionConfidenceRow('sad', this.emotionSnapshot.confidences.sad, this.emotionSnapshot.emotion === 'sad')
+      this.EmotionConfidenceRow('angry', this.emotionSnapshot.confidences.angry, this.emotionSnapshot.emotion === 'angry')
+      this.EmotionConfidenceRow('crying', this.emotionSnapshot.confidences.crying, this.emotionSnapshot.emotion === 'crying')
+    }
+    .width('100%')
+    .padding(16)
+    .borderRadius(12)
+    .backgroundColor('#FFFFFF')
+    .shadow({ radius: 4, color: '#10000000', offsetY: 2 })
+  }
+
+  @Builder EmotionConfidenceRow(label: string, value: number, isActive: boolean) {
+    Row() {
+      Text(label)
+        .fontSize(13)
+        .fontColor(isActive ? '#1A73E8' : '#5F6368')
+        .fontWeight(isActive ? FontWeight.Bold : FontWeight.Normal)
+        .width(70)
+      Progress({ value: value, total: 100, type: ProgressType.Linear })
+        .layoutWeight(1)
+        .height(12)
+        .color(isActive ? '#1A73E8' : '#DADCE0')
+        .backgroundColor('#F1F3F4')
+        .borderRadius(6)
+      Text(`${value}`)
+        .fontSize(13)
+        .fontColor('#5F6368')
+        .width(36)
+        .textAlign(TextAlign.End)
+    }
+    .width('100%')
+    .height(28)
+    .alignItems(VerticalAlign.Center)
+  }
+
+  @Builder EmotionLatencyPanel() {
+    Column({ space: 8 }) {
+      Text('表情延迟测试')
+        .fontSize(16)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#5F6368')
+
+      Row({ space: 8 }) {
+        Text('目标:')
+          .fontSize(14)
+          .fontColor('#202124')
+        ForEach(EMOTION_OPTIONS, (option: string, index: number) => {
+          Text(option)
+            .fontSize(12)
+            .fontColor(this.selectedTargetIndex === index ? '#FFFFFF' : '#5F6368')
+            .backgroundColor(this.selectedTargetIndex === index ? '#1A73E8' : '#F1F3F4')
+            .borderRadius(12)
+            .padding({ left: 8, right: 8, top: 4, bottom: 4 })
+            .onClick(() => { this.selectedTargetIndex = index; })
+        })
+      }
+      .width('100%')
+
+      Row({ space: 12 }) {
+        Button('开始变化测试')
+          .height(36)
+          .fontSize(14)
+          .backgroundColor('#1A73E8')
+          .fontColor('#FFFFFF')
+          .borderRadius(8)
+          .onClick(() => this.beginExpressionTest())
+        if (this.countdownText !== '') {
+          Text(this.countdownText)
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#EA4335')
+        }
+      }
+      .width('100%')
+
+      Column({ space: 4 }) {
+        Row() {
+          Text('状态:')
+            .fontSize(13)
+            .fontColor('#5F6368')
+            .width(100)
+          Text(this.latencyResult.status)
+            .fontSize(13)
+            .fontColor('#202124')
+        }
+        Row() {
+          Text('基线情绪:')
+            .fontSize(13)
+            .fontColor('#5F6368')
+            .width(100)
+          Text(this.latencyResult.baselineEmotion)
+            .fontSize(13)
+            .fontColor('#202124')
+        }
+        Row() {
+          Text('首次识别:')
+            .fontSize(13)
+            .fontColor('#5F6368')
+            .width(100)
+          Text(this.formatLatency(this.latencyResult.firstChangeLatencyMs))
+            .fontSize(13)
+            .fontColor('#1A73E8')
+            .fontWeight(FontWeight.Bold)
+        }
+        Row() {
+          Text('稳定识别:')
+            .fontSize(13)
+            .fontColor('#5F6368')
+            .width(100)
+          Text(this.formatLatency(this.latencyResult.stableChangeLatencyMs))
+            .fontSize(13)
+            .fontColor('#34A853')
+            .fontWeight(FontWeight.Bold)
+        }
+        Row() {
+          Text('回调频率:')
+            .fontSize(13)
+            .fontColor('#5F6368')
+            .width(100)
+          Text(this.callbackRatePerSec())
+            .fontSize(13)
+            .fontColor('#202124')
+        }
+        Row() {
+          Text('测试事件数:')
+            .fontSize(13)
+            .fontColor('#5F6368')
+            .width(100)
+          Text(`${this.latencyResult.eventsAfterPrompt}`)
+            .fontSize(13)
+            .fontColor('#202124')
+        }
+      }
+      .width('100%')
+    }
+    .width('100%')
+    .padding(16)
+    .borderRadius(12)
+    .backgroundColor('#FFFFFF')
+    .shadow({ radius: 4, color: '#10000000', offsetY: 2 })
+  }
+
+  @Builder EmotionDiagnosticsPanel() {
+    Column({ space: 4 }) {
+      Text('诊断信息')
+        .fontSize(16)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#5F6368')
+        .margin({ bottom: 4 })
+
+      this.EmotionDiagRow('initialized', `${this.emotionSnapshot.initialized}`)
+      this.EmotionDiagRow('running', `${this.emotionSnapshot.running}`)
+      this.EmotionDiagRow('eventCount', `${this.emotionSnapshot.eventCount}`)
+      this.EmotionDiagRow('eventSequence', `${this.emotionSnapshot.eventSequence}`)
+      this.EmotionDiagRow('modalType', `${this.emotionSnapshot.modalType}`)
+      this.EmotionDiagRow('emoNum', `${this.emotionSnapshot.emoNum}`)
+      this.EmotionDiagRow('lastEventTime', `${this.emotionSnapshot.lastEventTimeMs}`)
+      this.EmotionDiagRow('libraryPath', this.emotionSnapshot.libraryPath)
+      if (this.emotionSnapshot.lastErrorStage !== '') {
+        this.EmotionDiagRow('errorStage', this.emotionSnapshot.lastErrorStage)
+        this.EmotionDiagRow('errorMessage', this.emotionSnapshot.lastErrorMessage)
+      }
+    }
+    .width('100%')
+    .padding(16)
+    .borderRadius(12)
+    .backgroundColor('#FFFFFF')
+    .shadow({ radius: 4, color: '#10000000', offsetY: 2 })
+  }
+
+  @Builder EmotionDiagRow(label: string, value: string) {
+    Row() {
+      Text(label)
+        .fontSize(13)
+        .fontColor('#5F6368')
+        .width(120)
+      Text(value)
+        .fontSize(13)
+        .fontColor('#202124')
+        .layoutWeight(1)
+        .textOverflow({ overflow: TextOverflow.Ellipsis })
+        .maxLines(1)
+    }
+    .width('100%')
+    .height(24)
+  }
+
+  @Builder EmotionHistoryPanel() {
+    Column({ space: 4 }) {
+      Text('最近事件')
+        .fontSize(16)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#5F6368')
+        .margin({ bottom: 4 })
+
+      if (this.emotionSnapshot.recentEvents.length === 0) {
+        Text('暂无事件')
+          .fontSize(13)
+          .fontColor('#9AA0A6')
+          .width('100%')
+          .textAlign(TextAlign.Center)
+          .padding({ top: 12, bottom: 12 })
+      } else {
+        ForEach(this.emotionSnapshot.recentEvents, (event: EmotionRecentEvent) => {
+          Row() {
+            Text(`#${event.sequence}`)
+              .fontSize(11)
+              .fontColor('#9AA0A6')
+              .width(50)
+            Text(event.emotion)
+              .fontSize(13)
+              .fontColor('#202124')
+              .fontWeight(FontWeight.Medium)
+              .width(70)
+            Text(`${event.confidence}%`)
+              .fontSize(13)
+              .fontColor('#5F6368')
+              .width(45)
+            Text(`${event.timeMs}`)
+              .fontSize(11)
+              .fontColor('#9AA0A6')
+              .layoutWeight(1)
+              .textAlign(TextAlign.End)
+          }
+          .width('100%')
+          .height(24)
+          .padding({ left: 4, right: 4 })
+        }, (event: EmotionRecentEvent) => `${event.sequence}`)
+      }
+    }
+    .width('100%')
+    .padding(16)
+    .borderRadius(12)
+    .backgroundColor('#FFFFFF')
+    .shadow({ radius: 4, color: '#10000000', offsetY: 2 })
+  }
+
 
   private getSceneLocationText(loc: string): string {
     const map: Record<string, string> = {
