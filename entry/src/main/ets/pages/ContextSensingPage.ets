@@ -88,7 +88,7 @@ struct ContextSensingPage {
   }
 
   private refreshEmotion(): void {
-    const get = this.nativeContext['getEmotionDiagnosticsSnapshot'];
+    const get = this.nativeContext['getEmotionSnapshot'];
     if (get) {
       const raw = get() as string;
       this.emotionSnapshot = parseEmotionSnapshot(raw);
