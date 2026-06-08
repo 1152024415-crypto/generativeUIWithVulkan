@@ -9,23 +9,4 @@
 /.clang-format
 /.clang-tidy
 **/.test
-oh-package-lock.json5
-screenshots/
-*.ply
-*.ply
-
-# Shader 编译输出 (.spv)
-# 策略: agenui_engine/shaders 只存放源码，resources/rawfile 存放编译后的 .spv
-entry/src/main/cpp/render/agenui_engine/shaders/*.spv
-**/*.spv
-!/entry/src/main/resources/rawfile/*.spv
-
-# LLM config (contains API keys)
-entry/src/main/resources/rawfile/llm_config.json
-entry/src/main/resources/rawfile/llm_config_*.json
-
-*.log
-assets/icons/
-.claude/
-update_prompt.py
-debug_history.md
+/.appanalyzer
