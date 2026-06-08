@@ -23,13 +23,7 @@ import { DslFormat, getPrompt, getDebugCasesDirName, LANDSCAPE_BG_FILES, ICON_CA
 import { copyAllResourcesIfNeeded } from '../utils/ResourceCopier';
 import { EmotionType, recognizeEmotion } from '../utils/EmotionApi';
 import { EmotionDebouncer, mapFaceEmotionToChinese } from '../utils/EmotionDebouncer';
-
-interface EmotionStateWithConfidence {
-  emotion: string;
-  confidence: number;
-  confidences: Record<string, number>;
-  timestamp: number;
-}
+import { parseEmotionSnapshot } from '../utils/EmotionDebugTypes';
 
 interface PresetItem {
   name: string;
@@ -112,6 +106,7 @@ struct Index {
   private pendingShowLLMLog: boolean = false;
   private emotionPollTimer: number = -1;
   private emotionDebouncer: EmotionDebouncer = new EmotionDebouncer();
+  private readonly emotionPollIntervalMs: number = 500;
 
   // Preset prompts — set by applyOrientation() based on route params
   @State presetPrompts: SelectOption[] = [
@@ -334,8 +329,8 @@ struct Index {
   private startEmotionRecognition(): void {
     const initEmotionManager = this.xComponentContext['initEmotionManager'];
     const startEmotionDetection = this.xComponentContext['startEmotionDetection'];
-    const getEmotionState = this.xComponentContext['getEmotionState'];
-    if (!initEmotionManager || !startEmotionDetection || !getEmotionState) {
+    const getEmotionSnapshot = this.xComponentContext['getEmotionSnapshot'];
+    if (!initEmotionManager || !startEmotionDetection || !getEmotionSnapshot) {
       hilog.warn(0x0000, 'Index', '[Emotion] native methods unavailable');
       return;
     }
@@ -348,43 +343,27 @@ struct Index {
     if (this.emotionRunning && this.emotionPollTimer === -1) {
       this.emotionPollTimer = setInterval(() => {
         this.pollEmotionState();
-      }, 1000);
+      }, this.emotionPollIntervalMs);
     }
   }
 
   private pollEmotionState(): void {
-    const getEmotionStateWithConfidence = this.xComponentContext['getEmotionStateWithConfidence'];
-    const getEmotionState = this.xComponentContext['getEmotionState'];
+    const getEmotionSnapshot = this.xComponentContext['getEmotionSnapshot'];
 
-    if (typeof getEmotionStateWithConfidence === 'function') {
-      const stateRaw = getEmotionStateWithConfidence();
-      if (typeof stateRaw === 'object' && stateRaw !== null) {
-        const state = stateRaw as EmotionStateWithConfidence;
-        const displayEmotion = typeof state.emotion === 'string' ? state.emotion : 'neutral';
-        const confidence = typeof state.confidence === 'number' ? state.confidence : 0;
-        const confidences: Record<string, number> = state.confidences && typeof state.confidences === 'object'
-          ? state.confidences as Record<string, number>
-          : {};
-        const timestamp = typeof state.timestamp === 'number' ? state.timestamp : Date.now();
-
-        this.emotionState = displayEmotion;
-        hilog.info(0x0000, 'Index', `[Emotion] raw=${displayEmotion} conf=${confidence}`);
-
+    if (typeof getEmotionSnapshot === 'function') {
+      const snapshotRaw = getEmotionSnapshot();
+      if (typeof snapshotRaw === 'string' && snapshotRaw.length > 0) {
+        const snapshot = parseEmotionSnapshot(snapshotRaw);
+        this.emotionState = snapshot.emotion;
+        const confidences: Record<string, number> = snapshot.confidences as Record<string, number>;
         this.emotionDebouncer.push({
-          emotion: displayEmotion,
-          confidence: confidence,
-          confidences: confidences,
-          timestamp: timestamp
+          emotion: snapshot.emotion,
+          confidence: snapshot.confidence,
+          confidences,
+          timestamp: snapshot.snapshotTimeMs
         });
+        hilog.info(0x0000, 'Index', `[Emotion] state=${this.emotionState} conf=${snapshot.confidence} source=snapshot`);
         return;
-      }
-    }
-
-    if (typeof getEmotionState === 'function') {
-      const state = getEmotionState();
-      if (typeof state === 'string' && state.length > 0) {
-        this.emotionState = state;
-        this.emotionDebouncer.push({ emotion: state, confidence: 60, confidences: {}, timestamp: Date.now() });
       }
     }
   }
