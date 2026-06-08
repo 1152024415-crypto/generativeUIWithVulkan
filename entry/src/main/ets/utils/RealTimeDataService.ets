@@ -21,7 +21,7 @@ import { ActivityRecognizer, ActivityInfo } from './ActivityRecognizer';
 import { preferences } from '@kit.ArkData';
 import { common } from '@kit.AbilityKit';
 import http from '@ohos.net.http';
-import usageStatistics from '@ohos.resourceschedule.usageStatistics';
+import { queryBundleStatsInfos } from '@ohos.resourceschedule.usageStatistics';
 import notificationManager from '@ohos.notificationManager';
 import { SceneDetector, SceneInfo } from './SceneDetector';
 
@@ -415,7 +415,7 @@ export class RealTimeDataService {
       }
       
       // 获取所有活动通知
-      const notifications = await notificationManager.getAllActiveNotifications();
+      const notifications = await notificationManager.getActiveNotifications();
       
       let total = notifications.length;
       let unread = 0;
@@ -453,7 +453,7 @@ export class RealTimeDataService {
       const now = Date.now();
       const weekAgo = now - 7 * 24 * 60 * 60 * 1000;
       
-      const bundleStats = await usageStatistics.queryBundleStatsInfos(weekAgo, now);
+      const bundleStats = await queryBundleStatsInfos(weekAgo, now);
       
       const ignoredBundles = new Set([
         'com.huawei.android.launcher',

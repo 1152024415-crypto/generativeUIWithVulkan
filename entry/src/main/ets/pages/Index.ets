@@ -343,8 +343,17 @@ struct Index {
   }
 
   private pollEmotionState(): void {
-    const getEmotionStateWithConfidence = this.xComponentContext['getEmotionStateWithConfidence'];
-    const getEmotionState = this.xComponentContext['getEmotionState'];
+    interface EmotionStateWithConfidence {
+      emotion: string;
+      confidence: number;
+      confidences: Record<string, number>;
+      timestamp: number;
+    }
+
+    const getEmotionStateWithConfidence = this.xComponentContext['getEmotionStateWithConfidence']
+      as (() => EmotionStateWithConfidence | null) | undefined;
+    const getEmotionState = this.xComponentContext['getEmotionState']
+      as (() => string | null) | undefined;
 
     if (getEmotionStateWithConfidence) {
       const state = getEmotionStateWithConfidence();
