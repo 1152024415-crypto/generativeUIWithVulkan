@@ -822,7 +822,7 @@ napi_value PluginRender::Export(napi_env env, napi_value exports)
 {
     // Pass 'this' via data field so each NAPI callback knows which instance to use
     // instead of GetLatestInstance() which can return a wrong instance after page navigation.
-    constexpr napi_property_descriptor desc[] = {
+    napi_property_descriptor desc[] = {
         { "parseUIDescriptor", nullptr, PluginRender::NapiParseUIDescriptor, nullptr, nullptr, nullptr,
             napi_default, this},
         { "setLandscapeMode", nullptr, PluginRender::NapiSetLandscapeMode, nullptr, nullptr, nullptr,
@@ -862,7 +862,7 @@ napi_value PluginRender::Export(napi_env env, napi_value exports)
         { "resetEmotionDiagnostics", nullptr, PluginRender::NapiResetEmotionDiagnostics, nullptr, nullptr, nullptr,
             napi_default, this}
     };
-    constexpr size_t descCount = sizeof(desc) / sizeof(desc[0]);
+    size_t descCount = sizeof(desc) / sizeof(desc[0]);
     napi_define_properties(env, exports, descCount, desc);
     return exports;
 }
